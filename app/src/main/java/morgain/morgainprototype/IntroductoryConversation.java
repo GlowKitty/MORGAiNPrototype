@@ -4,8 +4,8 @@ import android.os.Handler;
 import android.widget.*;
 
 public class IntroductoryConversation {
-    private static TextView t;
-    private static ImageView v;
+    private TextView t;
+    private ImageView v;
     private static int[] spriteSequence = {
             R.drawable.waving, R.drawable.smilingresting, R.drawable.largegrin
     };
@@ -19,13 +19,13 @@ public class IntroductoryConversation {
         this.v = v;
     }
 
-    public static void startConvo() {
+    public void startConvo() {
         for (int i = 0; i < 3; i++) {
             setSprite(2000 * (i + 1), spriteSequence[i], dialogeSequence[i]);
         }
     }
 
-    private static void setSprite(int time, final int id, final String say) {
+    private void setSprite(int time, final int id, final String say) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
