@@ -21,25 +21,33 @@
         android:adjustViewBounds="true"
         android:layout_alignParentTop="true" />
 
-    <ScrollView
+    <TextView
+        android:id="@+id/textView"
+        android:layout_height="100dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView">
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="1">
+    <Button
+        android:text=" I'd like to get to know you too "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignParentStart="true" />
 
-            <TextView
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="306dp"
-                android:id="@+id/textView"
-                android:layout_width="350dp"
-                android:layout_height="100dp" />
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:text="I'd like to move on"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        android:elevation="0dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
