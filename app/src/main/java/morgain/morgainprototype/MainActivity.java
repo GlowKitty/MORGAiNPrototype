@@ -1,16 +1,10 @@
 package morgain.morgainprototype;
 
-import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MorgainFace.OnFragmentInteractionListener {
     private static int[] spriteSequence = {
             R.drawable.waving,
             R.drawable.smilingresting,
@@ -54,32 +48,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView  t = (TextView)  findViewById(R.id.textView);
+        /*TextView  t = (TextView)  findViewById(R.id.textView);
         ImageView v = (ImageView) findViewById(R.id.imageView);
-        final Button b1 = (Button) findViewById(R.id.button);
-        final Button b2 = (Button) findViewById(R.id.button2);
 
         SpriteChat ic = new SpriteChat(t, v, spriteSequence, dialogSequence);
-        ic.startChat();
+        ic.startChat();*/
 
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                b1.setVisibility(View.VISIBLE);
-                b2.setVisibility(View.VISIBLE);
-
-                b2.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        tutorial();
-                    }
-                });
+        if (findViewById(R.id.fragment_container_lower) != null) {
+            if (savedInstanceState != null) {
+                return;
             }
-        }, ic.getTotalWait());
+
+            MorgainFace mf = MorgainFace.newInstance(spriteSequence, dialogSequence);
+            mf.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_lower, mf).commit();
+            //mf.start();
+        }
+
     }
 
-    public void tutorial() {
-        Intent in = new Intent(this, Tutorial.class);
-        startActivity(in);
+    @Override
+    public void onTextTap(TextView t) {
+        MorgainFace mf = (MorgainFace) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container_lower);
+        if (mf != null) {
+            mf.skip();
+        }
     }
 }

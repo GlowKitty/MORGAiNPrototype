@@ -26,8 +26,8 @@ public class SpriteChat {
     public SpriteChat(TextView t, ImageView v, int[] spriteSequence, String[] dialogSequence) {
         this.t = t;
         this.v = v;
-        t.setOnClickListener(skip);
-        v.setOnClickListener(skip);
+        //t.setOnClickListener(skip);
+        //v.setOnClickListener(skip);
         this.spriteSequence = spriteSequence;
         this.dialogSequence = dialogSequence;
         this.h = new Handler();
