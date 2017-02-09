@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 /**
@@ -33,6 +35,17 @@ public class GenderDropdown extends Fragment {
         // Required empty public constructor
     }
 
+    /** personal methods */
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Spinner spinner = (Spinner) getView().findViewById(R.id.gender_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.genders, android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -42,11 +55,9 @@ public class GenderDropdown extends Fragment {
      * @return A new instance of fragment GenderDropdown.
      */
     // TODO: Rename and change types and number of parameters
-    public static GenderDropdown newInstance(String param1, String param2) {
+    public static GenderDropdown newInstance() {
         GenderDropdown fragment = new GenderDropdown();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,13 +76,6 @@ public class GenderDropdown extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_gender_dropdown, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -103,6 +107,6 @@ public class GenderDropdown extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onSpinnerSelect();
     }
 }

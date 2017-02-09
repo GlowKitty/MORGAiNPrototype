@@ -10,7 +10,6 @@ public class SpriteChat {
     private final int WAITTIME = 750;
     private final int CHARTIME = 25;
     private int totalWait = 0;
-    private boolean introOver = false;
     private static int[] spriteSequence;
     private static String[] dialogSequence;
     private Runnable set;
@@ -22,21 +21,25 @@ public class SpriteChat {
             skip();
         }
     };
+    private MainActivity m;
 
     public SpriteChat(TextView t, ImageView v, int[] spriteSequence, String[] dialogSequence) {
         this.t = t;
         this.v = v;
-        //t.setOnClickListener(skip);
-        //v.setOnClickListener(skip);
+        t.setOnClickListener(skip);
+        v.setOnClickListener(skip);
         this.spriteSequence = spriteSequence;
         this.dialogSequence = dialogSequence;
         this.h = new Handler();
+    }
 
+    public void setMainActivity(MainActivity m) {
+        this.m = m;
     }
 
     public void startChat() {
         if (spriteSequence.length != dialogSequence.length) {
-            t.setText("Wow, this is broken!");
+            t.setText("More sprites than dialog, check your arrays");
         } else {
             int sumTime = 0;
             int nextTime;
@@ -47,6 +50,17 @@ public class SpriteChat {
             }
             totalWait = sumTime;
         }
+        endIt(totalWait);
+    }
+
+    private void endIt(final int totalWait) {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                m.changeUI();
+            }
+        };
+        h.postDelayed(r, totalWait);
     }
 
     private void setSprite(final int time, final int id, final String say) {
@@ -78,11 +92,7 @@ public class SpriteChat {
         h.postDelayed(saying, time);
     }
 
-    public int getTotalWait() {
-        return totalWait;
-    }
-
-    public void skip() {
+    public void skip() {//fix implementation, its super broke
         h.removeCallbacks(set);
         h.removeCallbacks(saying);
     }
