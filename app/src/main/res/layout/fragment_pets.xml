@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="morgain.morgainprototype.Pets">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="insideOverlay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:text="Dog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dog" />
+
+            <CheckBox
+                android:text="Cat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cat" />
+
+            <CheckBox
+                android:text="Bird"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bird" />
+
+            <CheckBox
+                android:text="Hamser/Bunny/Rodent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rodent" />
+
+            <CheckBox
+                android:text="Snake/Reptile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/reptile" />
+
+            <CheckBox
+                android:text="Spider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spider" />
+
+            <CheckBox
+                android:text="Fish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fish" />
+
+            <CheckBox
+                android:text="Other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/other_pet" />
+
+            <CheckBox
+                android:text="No, I don't have any pets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/none_pet" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

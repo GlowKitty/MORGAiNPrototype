@@ -40,7 +40,7 @@
         <item>I myself do not have a gender, so refer to me as whatever you\'d like to!</item>
         <item>This is to reassure that you can have the full experience, without gender confining or influencing opinions of me.</item>
         <item>Now, _un_, how about we get to know each other!</item>
-        <item>I have a few questions for you, and then, you can ask me a few questions!</item>
+        <item>You can ask me a few questions, and then I\'ll have some questions for you!</item>
         <item>Though, if you would like to move right along, dont let me stop you!</item>
     </string-array>
 
@@ -90,5 +90,158 @@
         <item>I have a mood tracker… a progress tracker… a forum for your own pleasure, so you can contact others going through the same thing you are!</item>
         <item>There’s also me in general! You can talk to me when you feel like and I can help you find ways to cope and also show you some cool things based on your mood!</item>
         <item>Do note, that currently I am still a prototype and most of my features still don\'t work or aren\'t implemented.</item>
+    </string-array>
+
+
+
+    <array name="questions_sprite_start">
+        <item>@drawable/waving</item>
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/serious</item>
+        <item>@drawable/largegrin</item>
+        <item>@drawable/questioning</item>
+    </array>
+    <string-array name="questions_dialog_start">
+        <item>Great!</item>
+        <item>I am going to ask a few questions about you.</item>
+        <item>But do not worry, none of these are personal. They will help me get to know you better.</item>
+        <item>Let\'s get started!</item>
+        <item>Do you have any pets?</item>
+    </string-array>
+
+    <array name="dogs_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="dogs_dialog">
+        <item>Dogs are so cute and comforting! They are great friends!</item>
+    </string-array>
+
+    <array name="cats_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="cats_dialog">
+        <item>Cats are so cool and cute, especially when they are kittens!</item>
+    </string-array>
+
+    <array name="bird_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="bird_dialog">
+        <item>I\’ve always admired birds. I wish I could fly....</item>
+    </string-array>
+
+    <array name="rodent_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="rodent_dialog">
+        <item>I love small animals! They are so furry!</item>
+    </string-array>
+
+    <array name="reptile_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="reptile_dialog">
+        <item>I love small animals! They are so furry!</item>
+    </string-array>
+
+    <array name="spider_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="spider_dialog">
+        <item>Most people are afraid of spiders, but I think they’re actually pretty cute!</item>
+    </string-array>
+
+    <array name="fish_sprite">
+        <item>@drawable/waving</item>
+    </array>
+    <string-array name="fish_dialog">
+        <item>FISH ARE GREAT PETS. HAVE YOU SEEN THE WAY THEY SWIM?!</item>
+    </string-array>
+
+    <array name="other_pet_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="other_pet_dialog">
+        <item>That\’s awesome! Having an animal friend is always good for cheering you up!</item>
+    </string-array>
+
+    <array name="none_pet_sprite">
+        <item>@drawable/smilingresting</item>
+    </array>
+    <string-array name="none_pet_dialog">
+        <item>I understand! Pets can be a big responsibility, but they can also be very helpful and good friends!</item>
+    </string-array>
+
+
+
+    <array name="questions_sprite_after_pets">
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/largegrin</item>
+        <item>@drawable/questioning</item>
+    </array>
+    <string-array name="questions_dialog_after_pets">
+        <item>Pets are great friends to have and they are fun to take care of! It is always nice to have something you are passionate about!</item>
+        <item>Now, on to the next question!</item>
+        <item>Do you have any hobbies you enjoy?</item>
+    </string-array>
+
+    <array name="sports_sprite">
+        <item>@drawable/largegrin</item>
+        <item>@drawable/serious</item>
+    </array>
+    <string-array name="sports_dialog">
+        <item>Sports are fun and keep you active!</item>
+        <item>Except... I can\'t experience that...</item>
+    </string-array>
+
+    <array name="art_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="art_dialog">
+        <item>Wow! That is such a great talent to have! Any form of art is simply magical to me! To make such things is incredible!</item>
+    </string-array>
+
+    <array name="music_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="music_dialog">
+        <item>You must have a great ear then! Music is a great thing to clear the head and express how you feel!</item>
+    </string-array>
+
+    <array name="cook_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="cook_dialog">
+        <item>Video games are a great way to unwind, don’t you think?</item>
+    </string-array>
+
+    <array name="tv_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="tv_dialog">
+        <item>There are some pretty cool shows and movies out there!</item>
+    </string-array>
+
+    <array name="friends_sprite">
+        <item>@drawable/largegrin</item>
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="friends_dialog">
+        <item>Being social is always fun and can be a nice distraction!</item>
+        <item>Which is why I enjoy talking with you!</item>
+    </string-array>
+
+    <array name="other_hobby_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="other_hobby_dialog">
+        <item>That’s awesome that you have something you love to do!</item>
+    </string-array>
+
+    <array name="none_hobby_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="none_hobby_dialog">
+        <item>That’s okay! Sometimes, a hobby can be hard to find, but you just have to look for something you enjoy and stick with it!</item>
     </string-array>
 </resources>

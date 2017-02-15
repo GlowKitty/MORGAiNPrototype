@@ -68,7 +68,7 @@ public class MorgainFace extends Fragment {
         this.m = m;
     }
     public int getTotalWait() {
-        return totalWaitTime;
+        return sc.getTotalWait();
     }
 
     @Override

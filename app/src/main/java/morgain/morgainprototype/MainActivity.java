@@ -1,13 +1,9 @@
 package morgain.morgainprototype;
 
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements
@@ -44,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements
         this.totalWait = totalWait;
         changeUI();
     }
-    public void changeUI() {//make this so it can change dynamically, how to though?
+
+    public void changeUI() { //the entire changeUI block is so rediculously sloppy, please help it
         Handler h = new Handler();
         final MainActivity m = this;
         final EnterName en = EnterName.newInstance();
@@ -93,6 +90,15 @@ public class MainActivity extends AppCompatActivity implements
                             .replace(R.id.fragment_container_lower, sn).commit();
                 }
             };
+        } else if (id == 20) {
+            final Pets pt = Pets.newInstance(mf);
+            r = new Runnable() {
+                @Override
+                public void run() {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container_lower, pt).commit();
+                }
+            };
         } else {
             final Empty em = Empty.newInstance();
             r = new Runnable() {
@@ -123,17 +129,25 @@ public class MainActivity extends AppCompatActivity implements
 
     public void goToQuestions() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container_lower, QuestionsMenu.newInstance(mf)).commit();
+                .replace(R.id.fragment_container_lower, QuestionsMenu.newInstance(mf, m)).commit();
         mf.setSpriteChat(res.obtainTypedArray(R.array.questions_sprite_menu),
                 res.getStringArray(R.array.questions_dialog_menu), 10);
         getSupportFragmentManager().executePendingTransactions();
     }
+    public void goToUserQuestions() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_lower, Empty.newInstance()).commit();
+        mf.setSpriteChat(res.obtainTypedArray(R.array.questions_sprite_start),
+                res.getStringArray(R.array.questions_dialog_start), 20);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+
+
 
     public void onSpinnerSelect() {
         //TODO: everything
     }
-
-    public void onTextTap(TextView t) {
+    public void onTextTap(TextView t) {//this obviously doesnt work
         MorgainFace mf = (MorgainFace) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_container_lower);
         if (mf != null) {

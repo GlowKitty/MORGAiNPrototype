@@ -17,6 +17,7 @@ public class QuestionsMenu extends Fragment {
     private Resources res;
     private Runnable r;
     private Handler h;
+    private MainActivity m;
 
     public QuestionsMenu() {
         r = new Runnable() {
@@ -28,13 +29,17 @@ public class QuestionsMenu extends Fragment {
         };
         h = new Handler();
     }
-    public static QuestionsMenu newInstance(MorgainFace mf) {
+    public static QuestionsMenu newInstance(MorgainFace mf, MainActivity m) {
         QuestionsMenu fragment = new QuestionsMenu();
         fragment.setMorgainFace(mf);
+        fragment.setMainActivity(m);
         return fragment;
     }
     public void setMorgainFace(MorgainFace mf) {
         this.mf = mf;
+    }
+    public void setMainActivity(MainActivity m) {
+        this.m = m;
     }
 
     @Override
@@ -76,7 +81,7 @@ public class QuestionsMenu extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                m.goToUserQuestions();
             }
         });
     }

@@ -56,7 +56,7 @@ public class SpriteChat {
         }
 
         if (spriteSequence.length() != dialogSequence.length) {
-            t.setText("More sprites than dialog, check your arrays");
+            t.setText("sprite-dialog length mismatch, check your arrays");
         } else {
             int sumTime = 0;
             for (int i = 0; i < spriteSequence.length(); i++) {
@@ -66,9 +66,7 @@ public class SpriteChat {
             }
             totalWait = sumTime - WAITTIME;
         }
-        //m.setTotalWait(totalWait);
         m.changeUI(totalWait, id);
-
     }
 
     public void setResources(TypedArray spriteSequence, String[] dialogSequence, int id) {
@@ -111,8 +109,8 @@ public class SpriteChat {
         h.postDelayed(saying, time);
     }
 
-    public void skip() {//fix implementation, its super broke
-        h.removeCallbacks(set);
-        h.removeCallbacks(saying);
+    public void skip() {//TODO: fix implementation, its super broke
+        //h.removeCallbacks(set);
+        //h.removeCallbacks(saying);
     }
 }
