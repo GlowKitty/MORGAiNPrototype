@@ -1,5 +1,7 @@
 package morgain.morgainprototype;
 
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 import android.widget.*;
@@ -7,11 +9,11 @@ import android.widget.*;
 public class SpriteChat {
     private TextView t;
     private ImageView v;
-    private final int WAITTIME = 750;
-    private final int CHARTIME = 25;
+    private final int WAITTIME = 500;//750;
+    private final int CHARTIME = 15;
     private int totalWait = 0;
-    private static int[] spriteSequence;
-    private static String[] dialogSequence;
+    private TypedArray spriteSequence;
+    private String[] dialogSequence;
     private Runnable set;
     private Runnable saying;
     private final Handler h;
@@ -22,8 +24,11 @@ public class SpriteChat {
         }
     };
     private MainActivity m;
+    private int id = 0;
+    private UserData ud;
+    private String name = "";
 
-    public SpriteChat(TextView t, ImageView v, int[] spriteSequence, String[] dialogSequence) {
+    public SpriteChat(TextView t, ImageView v, TypedArray spriteSequence, String[] dialogSequence) {
         this.t = t;
         this.v = v;
         t.setOnClickListener(skip);
@@ -31,48 +36,62 @@ public class SpriteChat {
         this.spriteSequence = spriteSequence;
         this.dialogSequence = dialogSequence;
         this.h = new Handler();
+        ud = new UserData();
     }
 
     public void setMainActivity(MainActivity m) {
         this.m = m;
+        ud = ud.loadData(m.getApplicationContext());
+        if (ud == null) {
+            ud = new UserData();
+            System.out.println("UserData load failed");
+        }
+        name = ud.getFirstName();
     }
 
     public void startChat() {
-        if (spriteSequence.length != dialogSequence.length) {
+        int nextTime = 0;
+        for (int i = 0; i < dialogSequence.length; i++) {
+            dialogSequence[i] = dialogSequence[i].replaceAll("(_un_)", name);
+        }
+
+        if (spriteSequence.length() != dialogSequence.length) {
             t.setText("More sprites than dialog, check your arrays");
         } else {
             int sumTime = 0;
-            int nextTime;
-            for (int i = 0; i < spriteSequence.length; i++) {
+            for (int i = 0; i < spriteSequence.length(); i++) {
                 nextTime = dialogSequence[i].length() * CHARTIME;
-                setSprite(sumTime, spriteSequence[i], dialogSequence[i]);
+                setSprite(sumTime, spriteSequence.getDrawable(i), dialogSequence[i]);
                 sumTime += nextTime + WAITTIME;
             }
-            totalWait = sumTime;
+            totalWait = sumTime - WAITTIME;
         }
-        endIt(totalWait);
+        //m.setTotalWait(totalWait);
+        m.changeUI(totalWait, id);
+
     }
 
-    private void endIt(final int totalWait) {
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                m.changeUI();
-            }
-        };
-        h.postDelayed(r, totalWait);
+    public void setResources(TypedArray spriteSequence, String[] dialogSequence, int id) {
+        this.spriteSequence = spriteSequence;
+        this.dialogSequence = dialogSequence;
+        this.id = id;
     }
 
-    private void setSprite(final int time, final int id, final String say) {
+    public int getTotalWait() {
+        return totalWait;
+    }
+
+    private void setSprite(final int time, final Drawable id, final String say) {
         set = new Runnable() {
             @Override
             public void run() {
                 scrollText(say);
-                v.setImageResource(id);
+                v.setImageDrawable(id);
             }
         };
         h.postDelayed(set, time);
     }
+
     private void scrollText(final String say) {
         int time = 0;
         String str = "";

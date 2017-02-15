@@ -1,84 +1,146 @@
 package morgain.morgainprototype;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements
-        MorgainFace.OnFragmentInteractionListener, GenderDropdown.OnFragmentInteractionListener {
-    private static int[] spriteSequence = {
-            R.drawable.waving,
-            R.drawable.smilingresting,
-            R.drawable.largegrin,
-            R.drawable.questioning,
-            R.drawable.questioning, //5
-            R.drawable.largegrin,
-            R.drawable.smilingresting,
-            R.drawable.largegrin,
-            R.drawable.largegrin,
-            R.drawable.questioning,//10
-            R.drawable.questioning};/*,
-            R.drawable.smilingresting,
-            R.drawable.smilingresting,
-            R.drawable.serious,
-            R.drawable.smilingresting,//15
-            R.drawable.largegrin,
-            R.drawable.questioning
-    };*/
-    private static String[] dialogSequence = {
-            "Hello! My name is MORGAiN!",
-            "I was created as a guide for those in need.",
-            "But most importantly, I am here to be a friend!",
-            "Now, what is your name?",
-            "*User enters name here*", //5
-            "What a lovely name you have!",
-            "My name is MORGAiN, as I said before!",
-            "That stands for Mood Organizer Referrals Guidance Artificial Intelligence Nurturing.",
-            "Which are all things I am capable of!",
-            "Now I know this might be a sensitive topic, but what gender do you identify as?",//10
-            "*User selects from a dropdown menu*"};/*,
-            "I appreciate your honesty! \nGender is important to you humans and you should stick up for what you believe in!",
-            "I myself do not have a gender, so refer to me as whatever you'd like to!",
-            "This is to reassure that you can have the full experience, without gender confining or influencing opinions of me.",
-            "Now, $name, how about we get to know each other!",//15
-            "I have a few questions for you, and then, you can ask me a few questions!",
-            "Though, if you would like to move right along, dont let me stop you!"
-    };*/
+        MorgainFace.OnFragmentInteractionListener, GenderDropdown.OnFragmentInteractionListener,
+        EnterName.OnFragmentInteractionListener {
+    private int totalWait;
+    private MorgainFace mf;
+    private UserData ud;
+    private Resources res;
+    private MainActivity m = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        res = getResources();
 
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return;
             }
+            mf = MorgainFace.newInstance(res.obtainTypedArray(R.array.sprite_sequence_1),
+                    res.getStringArray(R.array.dialog_sequence_1), 1);
+            mf.setMainActivity(m);//feels sloppy
 
-            MorgainFace mf = MorgainFace.newInstance(spriteSequence, dialogSequence);
-            mf.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mf).commit();
-            mf.setMainActivity(this);
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mf)
+                    .commit();
+            getSupportFragmentManager().executePendingTransactions();
         }
+        ud = new UserData();
     }
 
+    public void setTotalWait(int totalWait) {
+        this.totalWait = totalWait;
+        changeUI();
+    }
     public void changeUI() {//make this so it can change dynamically, how to though?
-        GenderDropdown gd = GenderDropdown.newInstance();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_lower, gd).commit();
+        Handler h = new Handler();
+        final MainActivity m = this;
+        final EnterName en = EnterName.newInstance();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container_lower, en).commit();
+                en.setMainActivity(m);
+                getSupportFragmentManager().executePendingTransactions();
+            }
+        };
+        h.postDelayed(r, totalWait);
+    }
+    public void changeUI(int totalWait, int id) {
+        Handler h = new Handler();
+        final MainActivity m = this;
+        Runnable r;
+        if (id == 1) {
+            final EnterName en = EnterName.newInstance();
+            r = new Runnable() {
+                @Override
+                public void run() {
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment_container_lower, en).commit();
+                    en.setMainActivity(m);
+                    getSupportFragmentManager().executePendingTransactions();
+                }
+            };
+        } else if (id == 2) {
+            final GenderDropdown gd = GenderDropdown.newInstance();
+            gd.setMainActivity(m);
+            r = new Runnable() {
+                @Override
+                public void run() {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container_lower, gd).commit();
+                }
+            };
+        } else if (id == 3) {
+            final SkipOrNext sn = SkipOrNext.newInstance(m);
+            r = new Runnable() {
+                @Override
+                public void run() {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container_lower, sn).commit();
+                }
+            };
+        } else {
+            final Empty em = Empty.newInstance();
+            r = new Runnable() {
+                @Override
+                public void run() {
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment_container_lower, em).commit();
+                }
+            };
+        }
+        h.postDelayed(r, totalWait);
     }
 
-    @Override
+    public void changemf2() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_lower, Empty.newInstance()).commit();
+        mf.setSpriteChat(res.obtainTypedArray(R.array.sprite_sequence_2),
+                res.getStringArray(R.array.dialog_sequence_2), 2);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+    public void changemf3() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_lower, Empty.newInstance()).commit();
+        mf.setSpriteChat(res.obtainTypedArray(R.array.sprite_sequence_3),
+                res.getStringArray(R.array.dialog_sequence_3), 3);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+
+    public void goToQuestions() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_lower, QuestionsMenu.newInstance(mf)).commit();
+        mf.setSpriteChat(res.obtainTypedArray(R.array.questions_sprite_menu),
+                res.getStringArray(R.array.questions_dialog_menu), 10);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+
     public void onSpinnerSelect() {
         //TODO: everything
     }
 
-    @Override
     public void onTextTap(TextView t) {
         MorgainFace mf = (MorgainFace) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_container_lower);
         if (mf != null) {
             mf.skip();
         }
+    }
+    public void onEnterName() {
+        //TODO: everything
     }
 }

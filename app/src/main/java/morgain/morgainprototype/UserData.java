@@ -16,17 +16,15 @@ public class UserData implements Serializable {
     private String firstName;
     private String lastName;
     private String userName;
+    private int gender;
 
     public UserData() {
-
-    }
-    public UserData(String firstName, String lastName, String userName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.age = age;
+        firstName = "";
     }
 
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
     public void setName(String firstName) {
         this.firstName = firstName;
         this.lastName = "";
@@ -62,6 +60,7 @@ public class UserData implements Serializable {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(ud);
             oos.close();
+            System.out.println("User Data Saved");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -75,6 +74,7 @@ public class UserData implements Serializable {
             ObjectInputStream ois = new ObjectInputStream(fis);
             ud = (UserData) ois.readObject();
             ois.close();
+            System.out.println("User Data loaded");
             return ud;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

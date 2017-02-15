@@ -4,10 +4,24 @@
     android:layout_height="match_parent"
     tools:context="morgain.morgainprototype.EnterName">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="295dp"
+            android:layout_height="50dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/enter_text_name"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Next"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/next" />
+    </LinearLayout>
 
 </FrameLayout>

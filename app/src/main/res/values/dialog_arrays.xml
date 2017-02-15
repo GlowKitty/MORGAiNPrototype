@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="sprite_sequence_1">
+        <item>@drawable/waving</item>
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/largegrin</item>
+        <item>@drawable/questioning</item>
+    </array>
+    <array name="sprite_sequence_2">
+        <item>@drawable/largegrin</item>
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/largegrin</item>
+        <item>@drawable/largegrin</item>
+        <item>@drawable/questioning</item>
+    </array>
+    <array name="sprite_sequence_3">
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/serious</item>
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/largegrin</item>
+        <item>@drawable/questioning</item>
+    </array>
+
+    <string-array name="dialog_sequence_1">
+        <item>Hello! My name is MORGAiN!</item>
+        <item>I was created as a guide for those in need.</item>
+        <item>But most importantly, I am here to be a friend!</item>
+        <item>Now, what is your name?</item>
+    </string-array>
+    <string-array name="dialog_sequence_2">
+        <item>What a lovely name you have!</item>
+        <item>My name is MORGAiN, as I said before!</item>
+        <item>That stands for Mood Organizer Referrals Guidance Artificial Intelligence Nurturing.</item>
+        <item>Which are all things I am capable of!</item>
+        <item>Now I know this might be a sensitive topic, but what gender do you identify as?</item>
+    </string-array>
+    <string-array name="dialog_sequence_3">
+        <item>I appreciate your honesty! \nGender is important to you humans and you should stick up for what you believe in!</item>
+        <item>I myself do not have a gender, so refer to me as whatever you\'d like to!</item>
+        <item>This is to reassure that you can have the full experience, without gender confining or influencing opinions of me.</item>
+        <item>Now, _un_, how about we get to know each other!</item>
+        <item>I have a few questions for you, and then, you can ask me a few questions!</item>
+        <item>Though, if you would like to move right along, dont let me stop you!</item>
+    </string-array>
+
+
+
+    <array name="questions_sprite_menu">
+        <item>@drawable/largegrin</item>
+    </array>
+    <array name="questions_sprite_purpose">
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/largegrin</item>
+        <item>@drawable/questioning</item>
+        <item>@drawable/serious</item>
+        <item>@drawable/serious</item>
+        <item>@drawable/serious</item>
+    </array>
+    <array name="questions_sprite_helping">
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/serious</item>
+    </array>
+    <array name="questions_sprite_features">
+        <item>@drawable/largegrin</item>
+        <item>@drawable/questioning</item>
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/smilingresting</item>
+        <item>@drawable/serious</item>
+    </array>
+
+    <string-array name="questions_dialog_menu">
+        <item>Now _un_, feel free to ask me questions you have and I will do my best to answer them!</item>
+    </string-array>
+    <string-array name="questions_dialog_purpose">
+        <item>My purpose?</item>
+        <item>Well that sure is an interesting way to put this!</item>
+        <item>Well, lets see.</item>
+        <item>I was created to help people like you find healthy solutions to various issues regarding themselves.</item>
+        <item>And to provide a creative way to analyze and keep track of mood.</item>
+        <item>I was not created as a substitute for a doctor or any kind of professional. I am simply here as a tool and a friend.</item>
+    </string-array>
+    <string-array name="questions_dialog_helping">
+        <item>By giving you coping skills and resources!</item>
+        <item>As mentioned, I am not a substitute for a professional or a doctor. Please, keep that in mind throughout your experience.</item>
+    </string-array>
+    <string-array name="questions_dialog_features">
+        <item>Well, I have quite a few!</item>
+        <item>Lets see...</item>
+        <item>I have a mood tracker… a progress tracker… a forum for your own pleasure, so you can contact others going through the same thing you are!</item>
+        <item>There’s also me in general! You can talk to me when you feel like and I can help you find ways to cope and also show you some cool things based on your mood!</item>
+        <item>Do note, that currently I am still a prototype and most of my features still don\'t work or aren\'t implemented.</item>
+    </string-array>
+</resources>

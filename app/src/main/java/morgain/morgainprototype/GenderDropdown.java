@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 
@@ -20,16 +21,11 @@ import android.widget.Spinner;
  * create an instance of this fragment.
  */
 public class GenderDropdown extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
+
+    private Button b;
+    private MainActivity m;
+    private UserData ud;
 
     public GenderDropdown() {
         // Required empty public constructor
@@ -39,22 +35,27 @@ public class GenderDropdown extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Spinner spinner = (Spinner) getView().findViewById(R.id.gender_spinner);
+        ud = new UserData();
+        ud = ud.loadData(getContext());
+        final Spinner spinner = (Spinner) getView().findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.genders, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        b = (Button)   getView().findViewById(R.id.g_next);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ud.setGender(spinner.getSelectedItemPosition());
+                m.changemf3();
+            }
+        });
     }
 
+    public void setMainActivity(MainActivity m) {
+        this.m = m;
+    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GenderDropdown.
-     */
-    // TODO: Rename and change types and number of parameters
     public static GenderDropdown newInstance() {
         GenderDropdown fragment = new GenderDropdown();
         Bundle args = new Bundle();
@@ -65,10 +66,6 @@ public class GenderDropdown extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override

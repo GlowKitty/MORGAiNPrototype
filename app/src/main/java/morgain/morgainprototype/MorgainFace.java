@@ -1,6 +1,7 @@
 package morgain.morgainprototype;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,46 +20,27 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class MorgainFace extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     //my variables
     private SpriteChat sc;
     private TextView t;
     private ImageView v;
-    private static int[] spriteSequence;
+    private static TypedArray spriteSequence;
     private static String[] dialogSequence;
     private MainActivity m;
+    private int totalWaitTime;
+    private static int id;
 
     public MorgainFace() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment morgain.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MorgainFace newInstance(int[] param1, String[] param2) {
+    public static MorgainFace newInstance(TypedArray sprite, String[] dialog, int tmpId) {
         MorgainFace fragment = new MorgainFace();
-        Bundle args = new Bundle();
-
-        spriteSequence = param1;
-        dialogSequence = param2;
-
-        fragment.setArguments(args);
+        spriteSequence = sprite;
+        dialogSequence = dialog;
+        id = tmpId;
         return fragment;
     }
 
@@ -76,29 +58,37 @@ public class MorgainFace extends Fragment {
         sc.setMainActivity(m);
         sc.startChat();
     }
+
+    public void setSpriteChat(TypedArray spriteSequence, String[] dialogSequence, int id) {
+        sc.setResources(spriteSequence, dialogSequence, id);
+        sc.startChat();
+    }
+
     public void setMainActivity(MainActivity m) {
         this.m = m;
+    }
+    public int getTotalWait() {
+        return totalWaitTime;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        totalWaitTime = sc.getTotalWait();
+        m.setTotalWait(totalWaitTime);
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        LayoutInflater lf = getActivity().getLayoutInflater();
-        View view = lf.inflate(R.layout.fragment_morgain, container, false);
-        return view;//inflater.inflate(R.layout.fragment_morgain, container, false);
+        return inflater.inflate(R.layout.fragment_morgain, container, false);
     }
 
     public void onButtonPressed(TextView t) {
