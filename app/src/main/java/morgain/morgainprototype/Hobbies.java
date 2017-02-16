@@ -116,7 +116,7 @@ public class Hobbies extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                m.goHome();
             }
         });
     }

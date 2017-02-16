@@ -1,5 +1,6 @@
 package morgain.morgainprototype;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements
                     .commit();
             getSupportFragmentManager().executePendingTransactions();
         }
-        ud = new UserData();
+        ud = new UserData(this.getApplicationContext());
     }
 
     public void setTotalWait(int totalWait) {
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    public void goToQuestions() { //TODO: clean this up
+    public void goToQuestions() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container_lower, QuestionsMenu.newInstance(mf, m)).commit();
         mf.setSpriteChat(res.obtainTypedArray(R.array.questions_sprite_menu),
@@ -158,7 +159,9 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager().executePendingTransactions();
     }
 
-
+    public void goHome() {
+        startActivity(new Intent(this, HomeMenu.class));
+    }
 
     public void onSpinnerSelect() {
         //TODO: everything

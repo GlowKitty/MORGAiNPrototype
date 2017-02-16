@@ -36,7 +36,7 @@ public class GenderDropdown extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ud = new UserData();
-        ud = ud.loadData(getContext());
+        ud = ud.loadData();
         final Spinner spinner = (Spinner) getView().findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.genders, android.R.layout.simple_spinner_dropdown_item);

@@ -251,4 +251,13 @@
     <string-array name="none_hobby_dialog">
         <item>That’s okay! Sometimes, a hobby can be hard to find, but you just have to look for something you enjoy and stick with it!</item>
     </string-array>
+
+
+
+    <array name="home_default_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="home_default_dialog">
+        <item>Good morning! How are you feeling right now?</item>
+    </string-array>
 </resources>

@@ -28,6 +28,19 @@ public class SpriteChat {
     private UserData ud;
     private String name = "";
 
+    public SpriteChat(TextView t, ImageView v) {
+        this.t = t;
+        this.v = v;
+        h = new Handler();
+        ud = new UserData();
+        ud = ud.loadData();
+        if (ud == null) {
+            ud = new UserData();
+            System.out.println("UserData load failed");
+        }
+        name = ud.getFirstName();
+    }
+
     public SpriteChat(TextView t, ImageView v, TypedArray spriteSequence, String[] dialogSequence) {
         this.t = t;
         this.v = v;
@@ -35,18 +48,20 @@ public class SpriteChat {
         v.setOnClickListener(skip);
         this.spriteSequence = spriteSequence;
         this.dialogSequence = dialogSequence;
-        this.h = new Handler();
-        ud = new UserData();
-    }
+        h = new Handler();
 
-    public void setMainActivity(MainActivity m) {
-        this.m = m;
-        ud = ud.loadData(m.getApplicationContext());
+        ud = new UserData();
+        ud = ud.loadData();
         if (ud == null) {
             ud = new UserData();
             System.out.println("UserData load failed");
         }
         name = ud.getFirstName();
+
+    }
+
+    public void setMainActivity(MainActivity m) {
+        this.m = m;
     }
 
     public void startChat() {
@@ -66,7 +81,11 @@ public class SpriteChat {
             }
             totalWait = sumTime - WAITTIME;
         }
-        m.changeUI(totalWait, id);
+        try {
+            m.changeUI(totalWait, id);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setResources(TypedArray spriteSequence, String[] dialogSequence, int id) {

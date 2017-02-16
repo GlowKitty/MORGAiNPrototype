@@ -68,7 +68,7 @@
                 android:text="No... Not really..." />
 
             <Button
-                android:text="Continue..."
+                android:text="Continue to Home Screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/h_next" />

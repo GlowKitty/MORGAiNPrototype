@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class UserData implements Serializable {
+    private static Context ctx;
     private final String FILENAME = "MORGAiN_user_data";
 
     private int age;
@@ -19,6 +20,14 @@ public class UserData implements Serializable {
     private int gender;
 
     public UserData() {
+        if (ctx == null) {
+            ctx = MyApplication.getAppContext();
+        }
+        firstName = "";
+    }
+
+    public UserData(Context ctx) {
+        this.ctx = ctx;
         firstName = "";
     }
 
@@ -67,7 +76,7 @@ public class UserData implements Serializable {
             e.printStackTrace();
         }
     }
-    public UserData loadData(Context ctx) {
+    public UserData loadData() {
         UserData ud;
         try {
             FileInputStream fis = ctx.openFileInput(FILENAME);
