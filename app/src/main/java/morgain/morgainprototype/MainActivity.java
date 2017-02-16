@@ -91,12 +91,21 @@ public class MainActivity extends AppCompatActivity implements
                 }
             };
         } else if (id == 20) {
-            final Pets pt = Pets.newInstance(mf);
+            final Pets pt = Pets.newInstance(mf, m);
             r = new Runnable() {
                 @Override
                 public void run() {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container_lower, pt).commit();
+                }
+            };
+        } else if (id == 30) {
+            final Hobbies hb = Hobbies.newInstance(mf, m);
+            r = new Runnable() {
+                @Override
+                public void run() {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container_lower, hb).commit();
                 }
             };
         } else {
@@ -127,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    public void goToQuestions() {
+    public void goToQuestions() { //TODO: clean this up
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container_lower, QuestionsMenu.newInstance(mf, m)).commit();
         mf.setSpriteChat(res.obtainTypedArray(R.array.questions_sprite_menu),
@@ -139,6 +148,13 @@ public class MainActivity extends AppCompatActivity implements
                 .replace(R.id.fragment_container_lower, Empty.newInstance()).commit();
         mf.setSpriteChat(res.obtainTypedArray(R.array.questions_sprite_start),
                 res.getStringArray(R.array.questions_dialog_start), 20);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+    public void nextAfterPets() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_lower, Empty.newInstance()).commit();
+        mf.setSpriteChat(res.obtainTypedArray(R.array.questions_sprite_after_pets),
+                res.getStringArray(R.array.questions_dialog_after_pets), 30);
         getSupportFragmentManager().executePendingTransactions();
     }
 

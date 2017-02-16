@@ -6,24 +6,33 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 
 public class Pets extends Fragment {
     private CheckBox dog, cat, bird, rodent, reptile, spider, fish, other, none;
+    private Button petsNext;
     private MorgainFace mf;
+    private MainActivity m;
     private Resources res;
+
+    //TODO: save pets to user data
 
     public Pets() {
         //empty default constructor
     }
-    public static Pets newInstance(MorgainFace mf) {
+    public static Pets newInstance(MorgainFace mf, MainActivity m) {
         Pets fragment = new Pets();
         fragment.setMF(mf);
+        fragment.setM(m);
         return fragment;
     }
 
     private void setMF(MorgainFace mf) {
-        this.mf = mf;//somehow, this is null. make this be less null
+        this.mf = mf;
+    }
+    private void setM(MainActivity m) {
+        this.m = m;
     }
 
     @Override
@@ -31,15 +40,16 @@ public class Pets extends Fragment {
         super.onActivityCreated(savedInstanceState);
         res = getResources();
 
-        dog     = (CheckBox) getView().findViewById(R.id.dog);
-        cat     = (CheckBox) getView().findViewById(R.id.cat);
-        bird    = (CheckBox) getView().findViewById(R.id.bird);
-        rodent  = (CheckBox) getView().findViewById(R.id.rodent);
-        reptile = (CheckBox) getView().findViewById(R.id.reptile);
-        spider  = (CheckBox) getView().findViewById(R.id.spider);
-        fish    = (CheckBox) getView().findViewById(R.id.fish);
-        other   = (CheckBox) getView().findViewById(R.id.other_pet);
-        none    = (CheckBox) getView().findViewById(R.id.none_pet);
+        dog      = (CheckBox) getView().findViewById(R.id.dog);
+        cat      = (CheckBox) getView().findViewById(R.id.cat);
+        bird     = (CheckBox) getView().findViewById(R.id.bird);
+        rodent   = (CheckBox) getView().findViewById(R.id.rodent);
+        reptile  = (CheckBox) getView().findViewById(R.id.reptile);
+        spider   = (CheckBox) getView().findViewById(R.id.spider);
+        fish     = (CheckBox) getView().findViewById(R.id.fish);
+        other    = (CheckBox) getView().findViewById(R.id.other_pet);
+        none     = (CheckBox) getView().findViewById(R.id.none_pet);
+        petsNext = (Button)   getView().findViewById(R.id.p_next);
 
         dog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +112,13 @@ public class Pets extends Fragment {
             public void onClick(View v) {
                 mf.setSpriteChat(res.obtainTypedArray(R.array.none_pet_sprite),
                         res.getStringArray(R.array.none_pet_dialog), 26);
+            }
+        });
+
+        petsNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                m.nextAfterPets();
             }
         });
     }

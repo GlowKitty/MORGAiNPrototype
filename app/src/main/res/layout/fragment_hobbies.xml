@@ -2,12 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="morgain.morgainprototype.Pets">
+    tools:context="morgain.morgainprototype.Hobbies">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarStyle="insideOverlay">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,64 +14,64 @@
             android:orientation="vertical" >
 
             <CheckBox
-                android:text="Dog"
+                android:text="I like to play sports."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dog" />
+                android:id="@+id/sports" />
 
             <CheckBox
-                android:text="Cat"
+                android:text="I like to draw and other artsy things."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cat" />
+                android:id="@+id/art" />
 
             <CheckBox
-                android:text="Bird"
+                android:text="I like to sing or play music."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/bird" />
+                android:id="@+id/music" />
 
             <CheckBox
-                android:text="Hamser/Bunny/Rodent"
+                android:text="I like to cook."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rodent" />
+                android:id="@+id/cook" />
 
             <CheckBox
-                android:text="Snake/Reptile"
+                android:text="I like to play video games."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/reptile" />
+                android:id="@+id/video_games" />
 
             <CheckBox
-                android:text="Spider"
+                android:text="I like to watch TV."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spider" />
+                android:id="@+id/tv" />
 
             <CheckBox
-                android:text="Fish"
+                android:text="I like to hang out with friends."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/fish" />
+                android:id="@+id/friends" />
 
             <CheckBox
-                android:text="Other"
+                android:text="I like to do something else."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/other_pet" />
+                android:id="@+id/h_other" />
 
             <CheckBox
-                android:text="No, I don't have any pets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/none_pet" />
+                android:id="@+id/h_none"
+                android:text="No... Not really..." />
 
             <Button
                 android:text="Continue..."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/p_next" />
+                android:id="@+id/h_next" />
         </LinearLayout>
     </ScrollView>
 

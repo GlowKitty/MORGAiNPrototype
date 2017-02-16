@@ -141,7 +141,7 @@
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="reptile_dialog">
-        <item>I love small animals! They are so furry!</item>
+        <item>Reptiles are so unique! I think they are awesome to have as friends!</item>
     </string-array>
 
     <array name="spider_sprite">
@@ -212,7 +212,7 @@
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="cook_dialog">
-        <item>Video games are a great way to unwind, don’t you think?</item>
+        <item>If I could taste, I could truly understand the wonders of this, but it is really incredible that you can use that to make something delicious!</item>
     </string-array>
 
     <array name="tv_sprite">
@@ -229,6 +229,13 @@
     <string-array name="friends_dialog">
         <item>Being social is always fun and can be a nice distraction!</item>
         <item>Which is why I enjoy talking with you!</item>
+    </string-array>
+
+    <array name="video_games_sprite">
+        <item>@drawable/largegrin</item>
+    </array>
+    <string-array name="video_games_dialog">
+        <item>Video games are a great way to unwind, don\'t you think?</item>
     </string-array>
 
     <array name="other_hobby_sprite">

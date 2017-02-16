@@ -8,10 +8,11 @@
     tools:context="morgain.morgainprototype.MorgainFace">
     <TextView
         android:id="@+id/textView"
-        android:layout_height="120dp"
         android:layout_width="match_parent"
         android:layout_below="@+id/imageView"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_height="100dp" />
 
     <ImageView
         android:id="@+id/imageView"
