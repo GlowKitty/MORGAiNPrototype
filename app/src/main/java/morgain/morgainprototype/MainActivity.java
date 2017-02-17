@@ -110,12 +110,10 @@ public class MainActivity extends AppCompatActivity implements
                 }
             };
         } else {
-            final Empty em = Empty.newInstance();
             r = new Runnable() {
                 @Override
                 public void run() {
-                    getSupportFragmentManager().beginTransaction()
-                            .add(R.id.fragment_container_lower, em).commit();
+                    //do nothing
                 }
             };
         }

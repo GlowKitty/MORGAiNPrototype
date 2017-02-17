@@ -11,5 +11,7 @@ public class HomeMenu extends AppCompatActivity {
         setContentView(R.layout.activity_home_menu);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.layout_home_upper, HomeMorgain.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.layout_home_lower, HomeLowerMenu.newInstance()).commit();
     }
 }

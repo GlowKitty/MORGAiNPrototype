@@ -88,7 +88,7 @@
         <item>Well, I have quite a few!</item>
         <item>Lets see...</item>
         <item>I have a mood tracker… a progress tracker… a forum for your own pleasure, so you can contact others going through the same thing you are!</item>
-        <item>There’s also me in general! You can talk to me when you feel like and I can help you find ways to cope and also show you some cool things based on your mood!</item>
+        <item>There\'s also me in general! You can talk to me when you feel like and I can help you find ways to cope and also show you some cool things based on your mood!</item>
         <item>Do note, that currently I am still a prototype and most of my features still don\'t work or aren\'t implemented.</item>
     </string-array>
 
@@ -127,7 +127,7 @@
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="bird_dialog">
-        <item>I\’ve always admired birds. I wish I could fly....</item>
+        <item>I\'ve always admired birds. I wish I could fly....</item>
     </string-array>
 
     <array name="rodent_sprite">
@@ -148,7 +148,7 @@
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="spider_dialog">
-        <item>Most people are afraid of spiders, but I think they’re actually pretty cute!</item>
+        <item>Most people are afraid of spiders, but I think they\'re actually pretty cute!</item>
     </string-array>
 
     <array name="fish_sprite">
@@ -162,7 +162,7 @@
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="other_pet_dialog">
-        <item>That\’s awesome! Having an animal friend is always good for cheering you up!</item>
+        <item>That\'s awesome! Having an animal friend is always good for cheering you up!</item>
     </string-array>
 
     <array name="none_pet_sprite">
@@ -242,14 +242,14 @@
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="other_hobby_dialog">
-        <item>That’s awesome that you have something you love to do!</item>
+        <item>That\'s awesome that you have something you love to do!</item>
     </string-array>
 
     <array name="none_hobby_sprite">
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="none_hobby_dialog">
-        <item>That’s okay! Sometimes, a hobby can be hard to find, but you just have to look for something you enjoy and stick with it!</item>
+        <item>That\'s okay! Sometimes, a hobby can be hard to find, but you just have to look for something you enjoy and stick with it!</item>
     </string-array>
 
 

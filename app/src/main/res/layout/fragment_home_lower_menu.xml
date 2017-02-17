@@ -1,0 +1,33 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="morgain.morgainprototype.HomeLowerMenu">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:text="Track your mood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mood" />
+
+            <Button
+                android:text="Music-mood match"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/music" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
