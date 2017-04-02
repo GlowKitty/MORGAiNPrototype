@@ -6,16 +6,16 @@
     tools:context=".SkipOrNext">
 
     <Button
-        android:text="Skip Questions (TODO)"
+        android:text="Skip Questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/skip"
-        android:layout_weight="1" />
+        android:layout_weight="0.78" />
 
     <Button
         android:text="Contine to questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/next_q"
-        android:layout_weight="0.15" />
+        android:layout_weight="0.20" />
 </LinearLayout>

@@ -37,6 +37,12 @@ public class SkipOrNext extends Fragment {
                 m.goToQuestions();
             }
         });
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                m.goHome();
+            }
+        });
     }
 
     @Override

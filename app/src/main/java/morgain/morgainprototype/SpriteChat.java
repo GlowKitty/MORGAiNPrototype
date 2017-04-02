@@ -9,8 +9,8 @@ import android.widget.*;
 public class SpriteChat {
     private TextView t;
     private ImageView v;
-    private final int WAITTIME = 1000;
-    private final int CHARTIME = 20;
+    private final int WAITTIME = 1100;
+    private final int CHARTIME = 25;
     private int totalWait = 0;
     private TypedArray spriteSequence;
     private String[] dialogSequence;

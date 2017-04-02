@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class UserData implements Serializable {
     private static Context ctx;
@@ -18,6 +19,8 @@ public class UserData implements Serializable {
     private String lastName;
     private String userName;
     private int gender;
+    private boolean firstOpen = true;
+    private ArrayList<Mood> moods = new ArrayList<Mood>();
 
     public UserData() {
         if (ctx == null) {

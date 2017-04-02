@@ -260,4 +260,13 @@
     <string-array name="home_default_dialog">
         <item>Good morning! How are you feeling right now?</item>
     </string-array>
+
+
+
+    <array name="mood_color_sprite">
+        <item>@drawable/questioning</item>
+    </array>
+    <string-array name="mood_color_dialog">
+        <item>What color best describes how you feel?</item>
+    </string-array>
 </resources>
