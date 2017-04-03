@@ -1,5 +1,6 @@
 package morgain.morgainprototype;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -24,10 +25,20 @@ public class HomeMenu extends AppCompatActivity {
         SpriteChat sc = new SpriteChat(t, v); //unused, FOR NOW
     }
 
-
-
     public void startMood() {
-        //getSupportFragmentManager().beginTransaction().add(R.id./*todo*/, /*todo*/).commit();
+        MoodQuestions mq = new MoodQuestions();
+        FragmentQ f = (FragmentQ) mq.getNextQuestion();
+        f.setHomeMenu(this);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.layout_home_lower, f).commit();
+    }
+
+    public void nextMood() {
+        MoodQuestions mq = new MoodQuestions();
+        FragmentQ f = (FragmentQ) mq.getNextQuestion();
+        f.setHomeMenu(this);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.layout_home_lower, f).commit();
     }
 
 }

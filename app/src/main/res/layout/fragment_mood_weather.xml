@@ -1,0 +1,42 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="morgain.morgainprototype.MoodWeather">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/sunny"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sunny" />
+
+        <Button
+            android:id="@+id/rainy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rainy" />
+
+        <Button
+            android:id="@+id/snowy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Snowy" />
+
+        <Button
+            android:id="@+id/thunder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thunderstorms" />
+
+        <Button
+            android:id="@+id/extreme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Extreme Weather" />
+    </LinearLayout>
+</ScrollView>

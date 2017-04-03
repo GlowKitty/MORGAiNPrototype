@@ -20,6 +20,7 @@ public class UserData implements Serializable {
     private String userName;
     private int gender;
     private boolean firstOpen = true;
+    private Mood today;
     private ArrayList<Mood> moods = new ArrayList<Mood>();
 
     public UserData() {
@@ -64,6 +65,27 @@ public class UserData implements Serializable {
     }
     public String getUserName() {
         return userName;
+    }
+
+    public Mood getMood() {
+        return moods.get(moods.size() - 1);
+    }
+    public Mood getMood(int i) {
+        return moods.get(i);
+    }
+    public ArrayList<Mood> getMoods() {
+        return moods;
+    }
+    public Mood getTodayMood() {
+        return today;
+    }
+
+    public void setToday(Mood m) {
+        today = m;
+    }
+    public void flushTodayMood() {
+        moods.add(today);
+        today = new Mood();
     }
 
     public void saveData(UserData ud, Context ctx) {

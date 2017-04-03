@@ -1,7 +1,6 @@
 package morgain.morgainprototype;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class Mood {
     private double mood;
@@ -9,7 +8,7 @@ public class Mood {
     private Calendar date;
 
     public Mood() {
-        mood = 5;
+        mood = 0;
         date = Calendar.getInstance();
         date.set(Calendar.HOUR_OF_DAY, 0);
     }
@@ -17,7 +16,18 @@ public class Mood {
     public void modifyMood(double mod) {
         mood += mod;
     }
-    public double getMood() {
+    public double getMoodValue() {
         return mood;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public boolean isSameDay(Mood m) {
+        if (date.equals(m.getDate())) {
+            return true;
+        }
+        return false;
     }
 }
