@@ -23,7 +23,7 @@ public class UserData implements Serializable {
     private Mood today;
     private ArrayList<Mood> moods = new ArrayList<Mood>();
 
-    public UserData() {
+    public UserData() {//DEPRECATED DO NOT USE
         if (ctx == null) {
             ctx = MyApplication.getAppContext();
         }
@@ -88,13 +88,16 @@ public class UserData implements Serializable {
         today = new Mood();
     }
 
+    public void saveData() {
+        saveData(this, ctx);
+    }
     public void saveData(UserData ud, Context ctx) {
         try {
             FileOutputStream fos = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(ud);
             oos.close();
-            System.out.println("User Data Saved");
+            System.out.println("--User Data Saved--");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -102,13 +105,19 @@ public class UserData implements Serializable {
         }
     }
     public UserData loadData() {
+        return loadData(ctx);
+    }
+    public UserData loadData(Context ctx) {
         UserData ud;
+        /*while (ctx == null) {
+            ctx = MyApplication.getAppContext();
+        }*/
         try {
             FileInputStream fis = ctx.openFileInput(FILENAME);
             ObjectInputStream ois = new ObjectInputStream(fis);
             ud = (UserData) ois.readObject();
             ois.close();
-            System.out.println("User Data loaded");
+            System.out.println("--User Data loaded--");
             return ud;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

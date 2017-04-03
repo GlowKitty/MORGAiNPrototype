@@ -1,0 +1,42 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="morgain.morgainprototype.MoodScene">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/nice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nice Forest" />
+
+        <Button
+            android:id="@+id/dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dark Forest" />
+
+        <Button
+            android:id="@+id/magic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Magical Forest" />
+
+        <Button
+            android:id="@+id/quiet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quiet, dull forest" />
+
+        <Button
+            android:id="@+id/normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Normal Forest" />
+    </LinearLayout>
+</ScrollView>

@@ -1,5 +1,6 @@
 package morgain.morgainprototype;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,8 +22,8 @@ public class MoodWeather extends FragmentQ {
     }
 
     private void init() {
-        ud = new UserData(this.getContext());
-        ud = ud.loadData();
+        ud = new UserData(this.getContext());//MyApplication.getAppContext());
+        ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
     }
 
@@ -80,7 +81,7 @@ public class MoodWeather extends FragmentQ {
     private void modifyMood(double mod) {
         mood.modifyMood(mod);
         ud.setToday(mood);
-        ud.saveData(ud, getContext());
+        ud.saveData();//ud, getContext());
         getHomeMenu().nextMood();
     }
 

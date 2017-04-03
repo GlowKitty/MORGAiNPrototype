@@ -20,8 +20,8 @@ public class MoodAnimal extends FragmentQ {
         return fragment;
     }
     private void init() {
-        ud = new UserData(this.getContext());
-        ud = ud.loadData();
+        ud = new UserData(this.getContext());//MyApplication.getAppContext());//.getContext());
+        ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
     }
 
@@ -98,7 +98,7 @@ public class MoodAnimal extends FragmentQ {
     private void modifyMood(double mod) {
         mood.modifyMood(mod);
         ud.setToday(mood);
-        ud.saveData(ud, getContext());
+        ud.saveData();//ud, getContext());
         getHomeMenu().nextMood();
     }
 

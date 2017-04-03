@@ -22,8 +22,8 @@ public class MoodColor extends FragmentQ {
         return fragment;
     }
     private void init() {
-        ud = new UserData(this.getContext());
-        ud = ud.loadData();
+        ud = new UserData(this.getContext());//MyApplication.getAppContext());//this.getContext());
+        ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
     }
 
@@ -52,84 +52,63 @@ public class MoodColor extends FragmentQ {
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(-1);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(-1);
             }
         });
         orange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(0.5);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(0.5);
             }
         });
         yellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(1);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(1);
             }
         });
         green.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(0.5);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(0.5);
             }
         });
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(-2);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(-2);
             }
         });
         purple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(0);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(0);
             }
         });
         pink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(1);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(1);
             }
         });
         white.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(0);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(0);
             }
         });
         black.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mood.modifyMood(-2);
-                ud.setToday(mood);
-                ud.saveData(ud, getContext());
-                getHomeMenu().nextMood();
+                modifyMood(-2);
             }
         });
+    }
+    private void modifyMood(double mod) {
+        mood.modifyMood(mod);
+        ud.setToday(mood);
+        ud.saveData();//ud, getContext());
+        getHomeMenu().nextMood();
     }
 
     @Override

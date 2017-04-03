@@ -7,20 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MoodTimeOfDay extends FragmentQ {
+public class MoodScene extends FragmentQ {
     private UserData ud;
     private Mood mood;
 
-    public MoodTimeOfDay() {
+    public MoodScene() {
         // Required empty public constructor
     }
-    public static MoodTimeOfDay newInstance() {
-        MoodTimeOfDay fragment = new MoodTimeOfDay();
+    public static MoodScene newInstance() {
+        MoodScene fragment = new MoodScene();
         fragment.init();
         return fragment;
     }
     private void init() {
-        ud = new UserData(this.getContext());
+        ud = new UserData(this.getContext());//MyApplication.getAppContext());//this.getContext());
         ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
     }
@@ -37,33 +37,40 @@ public class MoodTimeOfDay extends FragmentQ {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button morning   = (Button) getView().findViewById(R.id.morning);
-        Button afternoon = (Button) getView().findViewById(R.id.afternoon);
-        Button evening   = (Button) getView().findViewById(R.id.evening);
-        Button night     = (Button) getView().findViewById(R.id.night);
+        Button nice   = (Button) getView().findViewById(R.id.nice);
+        Button dark   = (Button) getView().findViewById(R.id.dark);
+        Button magic  = (Button) getView().findViewById(R.id.magic);
+        Button quiet  = (Button) getView().findViewById(R.id.quiet);
+        Button normal = (Button) getView().findViewById(R.id.normal);
 
-        morning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                modifyMood(1);
-            }
-        });
-        afternoon.setOnClickListener(new View.OnClickListener() {
+        nice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 modifyMood(2);
             }
         });
-        evening.setOnClickListener(new View.OnClickListener() {
+        dark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modifyMood(-2);
+            }
+        });
+        magic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modifyMood(1);
+            }
+        });
+        quiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 modifyMood(-1);
             }
         });
-        night.setOnClickListener(new View.OnClickListener() {
+        normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyMood(-2);
+                modifyMood(0);
             }
         });
     }
@@ -78,7 +85,7 @@ public class MoodTimeOfDay extends FragmentQ {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mood_time_of_day, container, false);
+        return inflater.inflate(R.layout.fragment_mood_scene, container, false);
     }
 
 }

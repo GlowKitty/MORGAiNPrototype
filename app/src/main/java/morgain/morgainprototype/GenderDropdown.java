@@ -35,7 +35,7 @@ public class GenderDropdown extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ud = new UserData();
+        ud = new UserData(this.getContext());
         ud = ud.loadData();
         final Spinner spinner = (Spinner) getView().findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),

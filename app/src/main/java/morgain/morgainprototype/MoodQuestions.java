@@ -19,6 +19,7 @@ public class MoodQuestions {
         int rnd = rn.nextInt(4);
         int all = 0;
         Fragment f;
+        f = HomeLowerMenu.newInstance();//in case it gets past the switch which it wont...
         for (boolean b : used) {
             if (b) {
                 all++;
@@ -65,11 +66,10 @@ public class MoodQuestions {
                     f = getNextQuestion();
                 } else {
                     used[0] = true;
-                    // TODO: 4/2/2017
+                    f = MoodScene.newInstance();
                 }
                 break;
         }
-        f = HomeLowerMenu.newInstance();//in case it gets past the switch which it wont...
         return f;
     }
 }

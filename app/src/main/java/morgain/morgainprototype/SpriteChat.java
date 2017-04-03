@@ -9,8 +9,8 @@ import android.widget.*;
 public class SpriteChat {
     private TextView t;
     private ImageView v;
-    private final int WAITTIME = 1100;
-    private final int CHARTIME = 25;
+    private final int WAITTIME = 500;//1100;
+    private final int CHARTIME = 5;//25;
     private int totalWait = 0;
     private TypedArray spriteSequence;
     private String[] dialogSequence;
@@ -51,7 +51,13 @@ public class SpriteChat {
         h = new Handler();
 
         ud = new UserData();
-        ud = ud.loadData();
+        try {
+            ud = ud.loadData();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } finally {
+            ud = new UserData();
+        }
         if (ud == null) {
             ud = new UserData();
             System.out.println("UserData load failed");
