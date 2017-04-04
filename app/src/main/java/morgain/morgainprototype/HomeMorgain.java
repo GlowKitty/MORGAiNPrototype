@@ -31,7 +31,7 @@ public class HomeMorgain extends Fragment {
         res = getResources();
         v = (ImageView) getView().findViewById(R.id.home_morgain_face);
         t = (TextView)  getView().findViewById(R.id.home_morgain_text);
-        sc = new SpriteChat(t, v); //!!! set resources !!!
+        sc = new SpriteChat(getContext(), t, v); //!!! set resources !!!
         sc.setResources(res.obtainTypedArray(R.array.home_default_sprite),
                 res.getStringArray(R.array.home_default_dialog), 100);
         sc.startChat();

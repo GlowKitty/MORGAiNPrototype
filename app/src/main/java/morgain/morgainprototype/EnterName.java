@@ -32,13 +32,14 @@ public class EnterName extends Fragment {
         super.onActivityCreated(savedInstanceState);
         e = (EditText) getView().findViewById(R.id.enter_text_name);
         b = (Button)   getView().findViewById(R.id.next);
-        final UserData ud = new UserData(this.getContext());
+        UserData ut = new UserData(getContext());
+        final UserData ud = ut.loadData(getContext());
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ud.setName(e.getText().toString());
-                //ud.saveData(ud, getContext());
-                ud.saveData();
+                //ud.saveData(ud, getBaseContext());
+                ud.saveData(ud, getContext());
                 m.changemf2();
             }
         });

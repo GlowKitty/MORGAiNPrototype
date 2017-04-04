@@ -18,7 +18,7 @@ public class MoodColor extends FragmentQ {
 
     public static MoodColor newInstance() {
         MoodColor fragment = new MoodColor();
-        fragment.init();
+        //fragment.init();
         return fragment;
     }
     private void init() {
@@ -39,6 +39,7 @@ public class MoodColor extends FragmentQ {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        init();
         Button red    = (Button) getView().findViewById(R.id.red);
         Button orange = (Button) getView().findViewById(R.id.orange);
         Button yellow = (Button) getView().findViewById(R.id.yellow);
@@ -107,7 +108,7 @@ public class MoodColor extends FragmentQ {
     private void modifyMood(double mod) {
         mood.modifyMood(mod);
         ud.setToday(mood);
-        ud.saveData();//ud, getContext());
+        ud.saveData(ud, getContext());
         getHomeMenu().nextMood();
     }
 

@@ -54,8 +54,8 @@ public class MorgainFace extends Fragment {
         super.onActivityCreated(savedInstanceState);
         t = (TextView)  getView().findViewById(R.id.textView);
         v = (ImageView) getView().findViewById(R.id.imageView);
-        sc = new SpriteChat(t, v, spriteSequence, dialogSequence);
-        sc.setMainActivity(m);
+        sc = new SpriteChat(getContext(), t, v, spriteSequence, dialogSequence);
+        sc.setMainActivity(m, getContext());
         sc.startChat();
     }
 

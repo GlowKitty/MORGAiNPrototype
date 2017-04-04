@@ -16,7 +16,7 @@ public class MoodAnimal extends FragmentQ {
     }
     public static MoodAnimal newInstance() {
         MoodAnimal fragment = new MoodAnimal();
-        fragment.init();
+        //fragment.init();
         return fragment;
     }
     private void init() {
@@ -37,6 +37,7 @@ public class MoodAnimal extends FragmentQ {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        init();
         Button cat   = (Button) getView().findViewById(R.id.cat);
         Button dog   = (Button) getView().findViewById(R.id.dog);
         Button tiger = (Button) getView().findViewById(R.id.tiger);
@@ -98,7 +99,7 @@ public class MoodAnimal extends FragmentQ {
     private void modifyMood(double mod) {
         mood.modifyMood(mod);
         ud.setToday(mood);
-        ud.saveData();//ud, getContext());
+        ud.saveData(ud, getContext());
         getHomeMenu().nextMood();
     }
 

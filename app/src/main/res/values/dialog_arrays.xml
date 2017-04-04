@@ -258,15 +258,41 @@
         <item>@drawable/largegrin</item>
     </array>
     <string-array name="home_default_dialog">
-        <item>Good morning! How are you feeling right now?</item>
+        <item>Good morning _un_! How are you feeling right now?</item>
     </string-array>
 
 
 
+    <array name="mood_animal_sprite">
+        <item>@drawable/questioning</item>
+    </array>
+    <string-array name="mood_animal_dialog">
+        <item>Which animal best describes how you feel?</item>
+    </string-array>
     <array name="mood_color_sprite">
         <item>@drawable/questioning</item>
     </array>
     <string-array name="mood_color_dialog">
         <item>What color best describes how you feel?</item>
+    </string-array>
+    <array name="mood_scene_sprite">
+        <item>@drawable/questioning</item>
+    </array>
+    <string-array name="mood_scene_dialog">
+        <item>What type of forest scene best describes how you feel?</item>
+    </string-array>
+
+    <array name="mood_time_of_day_sprite">
+        <item>@drawable/questioning</item>
+    </array>
+    <string-array name="mood_time_of_day_dialog">
+        <item>What time of day best describes how you feel?</item>
+    </string-array>
+
+    <array name="mood_weather_sprite">
+        <item>@drawable/questioning</item>
+    </array>
+    <string-array name="mood_weather_dialog">
+        <item>What weather conditions best describes how you feel?</item>
     </string-array>
 </resources>

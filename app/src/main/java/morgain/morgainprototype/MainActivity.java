@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements
                     .commit();
             getSupportFragmentManager().executePendingTransactions();
         }
-        ud = new UserData(this.getApplicationContext());
+        ud = new UserData(getApplicationContext());
     }
 
     public void setTotalWait(int totalWait) {
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void goHome() {
-        ud.saveData();//ud, getApplicationContext());
+        ud.saveData(ud, getApplicationContext());
         startActivity(new Intent(this, HomeMenu.class));
     }
 

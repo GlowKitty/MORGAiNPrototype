@@ -16,7 +16,7 @@ public class MoodScene extends FragmentQ {
     }
     public static MoodScene newInstance() {
         MoodScene fragment = new MoodScene();
-        fragment.init();
+        //fragment.init();
         return fragment;
     }
     private void init() {
@@ -37,6 +37,7 @@ public class MoodScene extends FragmentQ {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        init();
         Button nice   = (Button) getView().findViewById(R.id.nice);
         Button dark   = (Button) getView().findViewById(R.id.dark);
         Button magic  = (Button) getView().findViewById(R.id.magic);
@@ -77,7 +78,7 @@ public class MoodScene extends FragmentQ {
     private void modifyMood(double mod) {
         mood.modifyMood(mod);
         ud.setToday(mood);
-        ud.saveData();//ud, getContext());
+        ud.saveData(ud, getContext());
         getHomeMenu().nextMood();
     }
 

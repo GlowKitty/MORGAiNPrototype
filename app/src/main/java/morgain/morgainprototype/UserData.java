@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class UserData implements Serializable {
-    private static Context ctx;
+    private transient Context ctx; //made transient so it isn't serialized
     private final String FILENAME = "MORGAiN_user_data";
 
     private int age;
@@ -77,20 +77,21 @@ public class UserData implements Serializable {
         return moods;
     }
     public Mood getTodayMood() {
+        if (today == null) {
+            today = new Mood();
+        }
         return today;
     }
 
     public void setToday(Mood m) {
         today = m;
     }
-    public void flushTodayMood() {
+    public void flushMood() {
         moods.add(today);
         today = new Mood();
     }
 
-    public void saveData() {
-        saveData(this, ctx);
-    }
+
     public void saveData(UserData ud, Context ctx) {
         try {
             FileOutputStream fos = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
@@ -99,19 +100,15 @@ public class UserData implements Serializable {
             oos.close();
             System.out.println("--User Data Saved--");
         } catch (FileNotFoundException e) {
+            System.out.println("--User Data Save Failed--");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("--User Data Save Failed--");
             e.printStackTrace();
         }
     }
-    public UserData loadData() {
-        return loadData(ctx);
-    }
     public UserData loadData(Context ctx) {
         UserData ud;
-        /*while (ctx == null) {
-            ctx = MyApplication.getAppContext();
-        }*/
         try {
             FileInputStream fis = ctx.openFileInput(FILENAME);
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -119,9 +116,12 @@ public class UserData implements Serializable {
             ois.close();
             System.out.println("--User Data loaded--");
             return ud;
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | NullPointerException e) {
             e.printStackTrace();
         }
-        return null;
+        System.out.println("--User Data Load Failed-- Creating new instance...");
+        ud = new UserData();
+        saveData(ud, ctx);//this might not work
+        return ud;
     }
 }

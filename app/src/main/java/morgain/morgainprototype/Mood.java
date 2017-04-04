@@ -1,10 +1,10 @@
 package morgain.morgainprototype;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Mood {
+public class Mood implements Serializable{
     private double mood;
-    //private Date date;
     private Calendar date;
 
     public Mood() {

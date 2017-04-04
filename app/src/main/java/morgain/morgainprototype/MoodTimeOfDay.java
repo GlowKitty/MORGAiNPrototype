@@ -16,7 +16,7 @@ public class MoodTimeOfDay extends FragmentQ {
     }
     public static MoodTimeOfDay newInstance() {
         MoodTimeOfDay fragment = new MoodTimeOfDay();
-        fragment.init();
+        //fragment.init();
         return fragment;
     }
     private void init() {
@@ -37,6 +37,7 @@ public class MoodTimeOfDay extends FragmentQ {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        init();
         Button morning   = (Button) getView().findViewById(R.id.morning);
         Button afternoon = (Button) getView().findViewById(R.id.afternoon);
         Button evening   = (Button) getView().findViewById(R.id.evening);
@@ -70,7 +71,7 @@ public class MoodTimeOfDay extends FragmentQ {
     private void modifyMood(double mod) {
         mood.modifyMood(mod);
         ud.setToday(mood);
-        ud.saveData();//ud, getContext());
+        ud.saveData(ud, getContext());
         getHomeMenu().nextMood();
     }
 

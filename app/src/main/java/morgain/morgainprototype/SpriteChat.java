@@ -1,5 +1,7 @@
 package morgain.morgainprototype;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -17,7 +19,7 @@ public class SpriteChat {
     private Runnable set;
     private Runnable saying;
     private final Handler h;
-    private final View.OnClickListener skip = new View.OnClickListener() {
+    private final View.OnClickListener skip = new View.OnClickListener() { //todo: make this work
         @Override
         public void onClick(View v) {
             skip();
@@ -27,47 +29,29 @@ public class SpriteChat {
     private int id = 0;
     private UserData ud;
     private String name = "";
+    private Context ctx;
 
-    public SpriteChat(TextView t, ImageView v) {
-        this.t = t;
-        this.v = v;
+    public SpriteChat(Context ctx, TextView t, ImageView v) {
+        init(ctx, t, v);
         h = new Handler();
-        ud = new UserData();
-        ud = ud.loadData();
-        if (ud == null) {
-            ud = new UserData();
-            System.out.println("UserData load failed");
-        }
-        name = ud.getFirstName();
     }
-
-    public SpriteChat(TextView t, ImageView v, TypedArray spriteSequence, String[] dialogSequence) {
-        this.t = t;
-        this.v = v;
-        t.setOnClickListener(skip);
-        v.setOnClickListener(skip);
+    public SpriteChat(Context ctx, TextView t, ImageView v, TypedArray spriteSequence, String[] dialogSequence) {
+        init(ctx, t, v);
+        h = new Handler();
         this.spriteSequence = spriteSequence;
         this.dialogSequence = dialogSequence;
-        h = new Handler();
-
+    }
+    private void init(Context ctx, TextView t, ImageView v) {
+        this.t = t;
+        this.v = v;
         ud = new UserData();
-        try {
-            ud = ud.loadData();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        } finally {
-            ud = new UserData();
-        }
-        if (ud == null) {
-            ud = new UserData();
-            System.out.println("UserData load failed");
-        }
+        ud = ud.loadData(ctx);
         name = ud.getFirstName();
-
     }
 
-    public void setMainActivity(MainActivity m) {
+    public void setMainActivity(MainActivity m, Context ctx) {
         this.m = m;
+        this.ctx = ctx;
     }
 
     public void startChat() {

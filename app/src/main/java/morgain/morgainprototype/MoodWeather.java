@@ -17,7 +17,7 @@ public class MoodWeather extends FragmentQ {
     }
     public static MoodWeather newInstance() {
         MoodWeather fragment = new MoodWeather();
-        fragment.init();
+        //fragment.init();
         return fragment;
     }
 
@@ -39,6 +39,7 @@ public class MoodWeather extends FragmentQ {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        init();
         Button sunny   = (Button) getView().findViewById(R.id.sunny);
         Button rainy   = (Button) getView().findViewById(R.id.rainy);
         Button snowy   = (Button) getView().findViewById(R.id.snowy);
@@ -81,7 +82,7 @@ public class MoodWeather extends FragmentQ {
     private void modifyMood(double mod) {
         mood.modifyMood(mod);
         ud.setToday(mood);
-        ud.saveData();//ud, getContext());
+        ud.saveData(ud, getContext());
         getHomeMenu().nextMood();
     }
 
