@@ -1,9 +1,9 @@
 package morgain.morgainprototype;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,18 +35,20 @@ public class GenderDropdown extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ud = new UserData(getContext());
-        ud = ud.loadData(getContext());
+        ud = UserData.instantiate(getContext());
         final Spinner spinner = (Spinner) getView().findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.genders, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setSelection(ud.getGender().getGender());
 
         b = (Button)   getView().findViewById(R.id.g_next);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ud.setGender(spinner.getSelectedItemPosition());
+                Log.i("GenderDropdown", "Next pressed, saving gender.");
+                ud.saveData(ud, getContext());
                 m.changemf3();
             }
         });

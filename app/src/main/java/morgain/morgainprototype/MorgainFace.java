@@ -31,6 +31,7 @@ public class MorgainFace extends Fragment {
     private MainActivity m;
     private int totalWaitTime;
     private static int id;
+    private boolean isOnMain = false;
 
     public MorgainFace() {
         // Required empty public constructor
@@ -45,7 +46,7 @@ public class MorgainFace extends Fragment {
     }
 
     /** personal methods */
-    public void skip() {
+    public void skip() { //todo: make this work
         sc.skip();
     }
 
@@ -55,7 +56,9 @@ public class MorgainFace extends Fragment {
         t = (TextView)  getView().findViewById(R.id.textView);
         v = (ImageView) getView().findViewById(R.id.imageView);
         sc = new SpriteChat(getContext(), t, v, spriteSequence, dialogSequence);
-        sc.setMainActivity(m, getContext());
+        if (isOnMain){
+            sc.setMainActivity(m);
+        }
         sc.startChat();
     }
 
@@ -65,6 +68,7 @@ public class MorgainFace extends Fragment {
     }
 
     public void setMainActivity(MainActivity m) {
+        isOnMain = true;
         this.m = m;
     }
     public int getTotalWait() {
@@ -75,7 +79,9 @@ public class MorgainFace extends Fragment {
     public void onStart() {
         super.onStart();
         totalWaitTime = sc.getTotalWait();
-        m.setTotalWait(totalWaitTime);
+        if (isOnMain) {
+            m.setTotalWait(totalWaitTime);
+        }
     }
 
 
@@ -103,8 +109,8 @@ public class MorgainFace extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            //throw new RuntimeException(context.toString()
+            //        + " must implement OnFragmentInteractionListener");
         }
     }
 

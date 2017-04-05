@@ -1,12 +1,8 @@
 package morgain.morgainprototype;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +28,7 @@ public class EnterName extends Fragment {
         super.onActivityCreated(savedInstanceState);
         e = (EditText) getView().findViewById(R.id.enter_text_name);
         b = (Button)   getView().findViewById(R.id.next);
-        UserData ut = new UserData(getContext());
+        UserData ut = UserData.instantiate(getContext());
         final UserData ud = ut.loadData(getContext());
         b.setOnClickListener(new View.OnClickListener() {
             @Override

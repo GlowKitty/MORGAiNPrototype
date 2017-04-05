@@ -1,30 +1,39 @@
 package morgain.morgainprototype;
 
-import android.app.Application;
+import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MoodWeather extends FragmentQ {
+public class MoodWeather extends FragmentQ implements Dialogs {
     private UserData ud;
     private Mood mood;
+    private final int ID = 1005;
 
     public MoodWeather() {
         // Required empty public constructor
     }
     public static MoodWeather newInstance() {
         MoodWeather fragment = new MoodWeather();
-        //fragment.init();
         return fragment;
     }
 
     private void init() {
-        ud = new UserData(this.getContext());//MyApplication.getAppContext());
-        ud = ud.loadData(this.getContext());
+        ud = UserData.instantiate(this.getContext());
+        //ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
+    }
+
+    public TypedArray getSprite() {
+        return getResources().obtainTypedArray(R.array.mood_weather_sprite);
+    }
+    public String[] getDialog() {
+        return getResources().getStringArray(R.array.mood_weather_dialog);
+    }
+    public int getID() {
+        return ID;
     }
 
     @Override

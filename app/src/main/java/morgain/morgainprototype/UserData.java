@@ -1,6 +1,9 @@
 package morgain.morgainprototype;
 
 import android.content.Context;
+import android.util.Log;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,61 +15,67 @@ import java.util.ArrayList;
 
 public class UserData implements Serializable {
     private transient Context ctx; //made transient so it isn't serialized
-    private final String FILENAME = "MORGAiN_user_data";
+    private static final String FILENAME = "MORGAiN_user_data_dev_1";
 
     private int age;
-    private String firstName;
-    private String lastName;
-    private String userName;
-    private int gender;
-    private boolean firstOpen = true;
+    private String name;
+    //private int gender; //TODO: assign gender
+    private Gender gender;
+    private boolean firstRun = true;
     private Mood today;
     private ArrayList<Mood> moods = new ArrayList<Mood>();
 
-    public UserData() {//DEPRECATED DO NOT USE
-        if (ctx == null) {
-            ctx = MyApplication.getAppContext();
-        }
-        firstName = "";
-    }
-
     public UserData(Context ctx) {
         this.ctx = ctx;
-        firstName = "";
+        name = "";
+        gender = new Gender(ctx);
+        Log.i("UserData", "New instance of UserData created");
+    }
+    public static UserData instantiate(Context ctx) {
+        UserData ud = new UserData(ctx);
+        File file = ctx.getFileStreamPath(FILENAME);
+        if(file.exists()) {
+            Log.i("UserData", "User Data found, loading...");
+            ud = ud.loadData(ctx);
+        }
+        return ud;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
+    /*|=====================|
+      |  First Run Methods  |
+      |=====================|*/
+    public boolean getFirstRun() {
+        return firstRun;
     }
-    public void setName(String firstName) {
-        this.firstName = firstName;
-        this.lastName = "";
-    }
-    public void setName(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-    public void setName(String firstName, String lastName, String userName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setFirstRun(boolean firstRun) {
+        this.firstRun = firstRun;
     }
 
+    /*|================|
+      |  Name Methods  |
+      |================|*/
+    public void setName(String name) {
+        this.name = name;
+        Log.i("UserData", "Name set to \"" + this.name + "\"");
+    }
     public String getName() {
-        return firstName + " " + lastName;
-    }
-    public String getFirstName() {
-        return firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public String getUserName() {
-        return userName;
+        return name;
     }
 
+    /*|==================|
+      |  Gender Methods  |
+      |==================|*/
+    public void setGender(int gender) {
+        this.gender.setGender(gender);
+        Log.i("UserData/Gender", "Gender set to " + this.gender.getGender());
+    }
+    public Gender getGender() {
+        return gender;
+    }
+
+    /*|================|
+      |  Mood Methods  |
+      |================|*/
     public Mood getMood() {
         return moods.get(moods.size() - 1);
     }
@@ -82,7 +91,6 @@ public class UserData implements Serializable {
         }
         return today;
     }
-
     public void setToday(Mood m) {
         today = m;
     }
@@ -91,19 +99,19 @@ public class UserData implements Serializable {
         today = new Mood();
     }
 
-
+    /*|================|
+      |  Data Methods  |
+      |================|*/
     public void saveData(UserData ud, Context ctx) {
         try {
             FileOutputStream fos = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(ud);
             oos.close();
-            System.out.println("--User Data Saved--");
-        } catch (FileNotFoundException e) {
-            System.out.println("--User Data Save Failed--");
-            e.printStackTrace();
+            fos.close();
+            Log.i("UserData", "User Data Saved");
         } catch (IOException e) {
-            System.out.println("--User Data Save Failed--");
+            Log.e("UserData", "User Data Save Failed");
             e.printStackTrace();
         }
     }
@@ -114,14 +122,14 @@ public class UserData implements Serializable {
             ObjectInputStream ois = new ObjectInputStream(fis);
             ud = (UserData) ois.readObject();
             ois.close();
-            System.out.println("--User Data loaded--");
-            return ud;
+            fis.close();
+            Log.i("UserData", "User Data Loaded");
         } catch (IOException | ClassNotFoundException | NullPointerException e) {
             e.printStackTrace();
+            Log.e("UserData", "User Data Load Failed-- Creating new instance...");
+            ud = new UserData(ctx);
+            saveData(ud, ctx);
         }
-        System.out.println("--User Data Load Failed-- Creating new instance...");
-        ud = new UserData();
-        saveData(ud, ctx);//this might not work
         return ud;
     }
 }

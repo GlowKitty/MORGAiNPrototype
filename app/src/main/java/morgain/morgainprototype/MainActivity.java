@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements
                     .commit();
             getSupportFragmentManager().executePendingTransactions();
         }
-        ud = new UserData(getApplicationContext());
+        ud = UserData.instantiate(getApplicationContext());
     }
 
     public void setTotalWait(int totalWait) {

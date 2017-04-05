@@ -5,10 +5,11 @@ import android.support.v4.app.Fragment;
 import java.util.Random;
 
 public class MoodQuestions {
-    private final int NUM_QUESTIONS = 5;
-    private boolean[] used = new boolean[NUM_QUESTIONS];
+    private static final int NUM_QUESTIONS = 5;
+    private static boolean[] used = new boolean[NUM_QUESTIONS];
     private Random rn = new Random();
     private Context ctx;
+    private static int rnd;
 
 
     public MoodQuestions(Context ctx) {
@@ -18,11 +19,10 @@ public class MoodQuestions {
         }
     }
 
-    public Fragment getNextQuestion() {
-        int rnd = rn.nextInt(4);
+    public Fragment getNextQuestion() throws NullPointerException {
         int all = 0;
-        Fragment f;
-        f = HomeLowerMenu.newInstance();//in case it gets past the switch which it wont...
+        rnd = rn.nextInt(5);
+        Fragment f = null;
 
         for (boolean b : used) {
             if (b) {
@@ -30,10 +30,10 @@ public class MoodQuestions {
             }
         }
         if (all >= used.length) {
-            f = HomeLowerMenu.newInstance(); //TODO: make a "finished with all 5 questions" fragment
+            return null;
         }
 
-        switch(rnd) {
+        switch (rnd) {
             case 0:
                 if (used[0]) {
                     f = getNextQuestion();
@@ -43,34 +43,34 @@ public class MoodQuestions {
                 }
                 break;
             case 1:
-                if (used[0]) {
+                if (used[1]) {
                     f = getNextQuestion();
                 } else {
-                    used[0] = true;
+                    used[1] = true;
                     f = MoodAnimal.newInstance();
                 }
                 break;
             case 2:
-                if (used[0]) {
+                if (used[2]) {
                     f = getNextQuestion();
                 } else {
-                    used[0] = true;
+                    used[2] = true;
                     f = MoodWeather.newInstance();
                 }
                 break;
             case 3:
-                if (used[0]) {
+                if (used[3]) {
                     f = getNextQuestion();
                 } else {
-                    used[0] = true;
+                    used[3] = true;
                     f = MoodTimeOfDay.newInstance();
                 }
                 break;
             case 4:
-                if (used[0]) {
+                if (used[4]) {
                     f = getNextQuestion();
                 } else {
-                    used[0] = true;
+                    used[4] = true;
                     f = MoodScene.newInstance();
                 }
                 break;

@@ -1,18 +1,18 @@
 package morgain.morgainprototype;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-public class SpriteChat {
+public class SpriteChat { //TODO: organize these variables
     private TextView t;
     private ImageView v;
-    private final int WAITTIME = 500;//1100;
-    private final int CHARTIME = 5;//25;
+    private final int WAITTIME = 1100;
+    private final int CHARTIME = 25;
     private int totalWait = 0;
     private TypedArray spriteSequence;
     private String[] dialogSequence;
@@ -30,6 +30,7 @@ public class SpriteChat {
     private UserData ud;
     private String name = "";
     private Context ctx;
+    private boolean isOnMain = false;
 
     public SpriteChat(Context ctx, TextView t, ImageView v) {
         init(ctx, t, v);
@@ -44,24 +45,31 @@ public class SpriteChat {
     private void init(Context ctx, TextView t, ImageView v) {
         this.t = t;
         this.v = v;
-        ud = new UserData();
-        ud = ud.loadData(ctx);
-        name = ud.getFirstName();
+        this.ctx = ctx;
+        ud = UserData.instantiate(ctx);
+        name = ud.getName();
+        Log.i("SpriteChat", "Name at init: \"" + name + "\"");
     }
 
-    public void setMainActivity(MainActivity m, Context ctx) {
+    public void setMainActivity(MainActivity m) {
+        isOnMain = true;
         this.m = m;
-        this.ctx = ctx;
     }
 
     public void startChat() {
         int nextTime = 0;
+        ud = ud.loadData(ctx);
+        if (!name.equals(ud.getName())) {
+            name = ud.getName();
+            Log.i("SpriteChat", "Name reset to \"" + name + "\"");
+        }
+        Log.i("SpriteChat", "Name at start: \"" + name + "\"");
         for (int i = 0; i < dialogSequence.length; i++) {
             dialogSequence[i] = dialogSequence[i].replaceAll("(_un_)", name);
         }
 
         if (spriteSequence.length() != dialogSequence.length) {
-            t.setText("sprite-dialog length mismatch, check your arrays");
+            Log.wtf("SpriteChat", "Sprite-Dialog length mismatch, check your arrays");
         } else {
             int sumTime = 0;
             for (int i = 0; i < spriteSequence.length(); i++) {
@@ -71,10 +79,12 @@ public class SpriteChat {
             }
             totalWait = sumTime - WAITTIME;
         }
-        try {
-            m.changeUI(totalWait, id);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        if (isOnMain) {
+            try {
+                m.changeUI(totalWait, id);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
     }
 

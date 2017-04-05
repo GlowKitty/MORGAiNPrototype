@@ -1,5 +1,7 @@
 package morgain.morgainprototype;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -15,6 +17,7 @@ public class Mood implements Serializable{
 
     public void modifyMood(double mod) {
         mood += mod;
+        Log.i("Mood", "Mood value modified to " + mood);
     }
     public double getMoodValue() {
         return mood;

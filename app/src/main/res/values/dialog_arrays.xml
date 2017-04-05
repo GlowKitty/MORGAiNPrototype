@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <array name="error_sprite">
+        <item>@drawable/serious</item>
+    </array>
+    <string-array name="error_dialog">
+        <item>This is an error! This is broken!</item>
+    </string-array>
+
     <array name="sprite_sequence_1">
         <item>@drawable/waving</item>
         <item>@drawable/smilingresting</item>

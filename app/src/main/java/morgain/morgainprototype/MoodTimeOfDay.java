@@ -1,28 +1,38 @@
 package morgain.morgainprototype;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MoodTimeOfDay extends FragmentQ {
+public class MoodTimeOfDay extends FragmentQ implements Dialogs {
     private UserData ud;
     private Mood mood;
+    private final int ID = 1004;
 
     public MoodTimeOfDay() {
         // Required empty public constructor
     }
     public static MoodTimeOfDay newInstance() {
         MoodTimeOfDay fragment = new MoodTimeOfDay();
-        //fragment.init();
         return fragment;
     }
     private void init() {
-        ud = new UserData(this.getContext());
-        ud = ud.loadData(this.getContext());
+        ud = UserData.instantiate(this.getContext());
+        //ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
+    }
+
+    public TypedArray getSprite() {
+        return getResources().obtainTypedArray(R.array.mood_time_of_day_sprite);
+    }
+    public String[] getDialog() {
+        return getResources().getStringArray(R.array.mood_time_of_day_dialog);
+    }
+    public int getID() {
+        return ID;
     }
 
     @Override

@@ -1,28 +1,39 @@
 package morgain.morgainprototype;
 
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MoodAnimal extends FragmentQ {
+public class MoodAnimal extends FragmentQ implements Dialogs {
     private UserData ud;
     private Mood mood;
+    private final int ID = 1001;
 
     public MoodAnimal() {
         // Required empty public constructor
     }
     public static MoodAnimal newInstance() {
         MoodAnimal fragment = new MoodAnimal();
-        //fragment.init();
         return fragment;
     }
     private void init() {
-        ud = new UserData(this.getContext());//MyApplication.getAppContext());//.getContext());
-        ud = ud.loadData(this.getContext());
+        ud = UserData.instantiate(getContext());
+        //ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
+    }
+
+    public TypedArray getSprite() {
+        return getResources().obtainTypedArray(R.array.mood_animal_sprite);
+    }
+    public String[] getDialog() {
+        return getResources().getStringArray(R.array.mood_animal_dialog);
+    }
+    public int getID() {
+        return ID;
     }
 
     @Override
