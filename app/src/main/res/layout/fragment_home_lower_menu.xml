@@ -22,10 +22,22 @@
                 android:id="@+id/mood" />
 
             <Button
+                android:id="@+id/view_mood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Mood" />
+
+            <Button
                 android:text="Music-mood match"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/music" />
+
+            <Button
+                android:id="@+id/first_run"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Do first run again" />
 
         </LinearLayout>
     </ScrollView>

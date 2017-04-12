@@ -15,11 +15,10 @@ import java.util.ArrayList;
 
 public class UserData implements Serializable {
     private transient Context ctx; //made transient so it isn't serialized
-    private static final String FILENAME = "MORGAiN_user_data_dev_1";
+    private static final String FILENAME = "MORGAiN_user_data_dev_6";
 
     private int age;
     private String name;
-    //private int gender; //TODO: assign gender
     private Gender gender;
     private boolean firstRun = true;
     private Mood today;
@@ -48,6 +47,7 @@ public class UserData implements Serializable {
         return firstRun;
     }
     public void setFirstRun(boolean firstRun) {
+        Log.i("UserData", "firstRun set to " + firstRun);
         this.firstRun = firstRun;
     }
 
@@ -95,6 +95,7 @@ public class UserData implements Serializable {
         today = m;
     }
     public void flushMood() {
+        Log.i("UserData/Mood", "Mood flushed to array, value: " + today.getMoodValue());
         moods.add(today);
         today = new Mood();
     }
@@ -123,10 +124,10 @@ public class UserData implements Serializable {
             ud = (UserData) ois.readObject();
             ois.close();
             fis.close();
-            Log.i("UserData", "User Data Loaded");
+            Log.i("UserData", "User Data for " + ud.getName() + " Loaded");
         } catch (IOException | ClassNotFoundException | NullPointerException e) {
             e.printStackTrace();
-            Log.e("UserData", "User Data Load Failed-- Creating new instance...");
+            Log.e("UserData", "User Data Load Failed - Creating new instance...");
             ud = new UserData(ctx);
             saveData(ud, ctx);
         }

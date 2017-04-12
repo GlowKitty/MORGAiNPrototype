@@ -1,6 +1,7 @@
 package morgain.morgainprototype;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,24 +14,36 @@ public class HomeMenu extends AppCompatActivity {
     private MoodQuestions mq;
     private MorgainFace mf;
     private UserData ud;
+    private SpriteChat sc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_menu);
-        UserData ud = UserData.instantiate(getApplicationContext());
+
+        ud = UserData.instantiate(getApplicationContext());
+
+        TextView  t = (TextView)  findViewById(R.id.home_morgain_text);
+        ImageView v = (ImageView) findViewById(R.id.home_morgain_face);
+        sc = new SpriteChat(getApplicationContext(), t, v);
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.layout_home_upper, HomeMorgain.newInstance()).commit();
+                .add(R.id.layout_home_upper, HomeMorgain.newInstance(getApplicationContext()))
+                .commit();
+
         HomeLowerMenu hlm = HomeLowerMenu.newInstance();
         hlm.setHomeMenu(this);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.layout_home_lower, hlm).commit();
+    }
 
-        /*TextView  t = (TextView)  findViewById(R.id.home_morgain_text);
-        ImageView v = (ImageView) findViewById(R.id.home_morgain_face);
-        SpriteChat sc = new SpriteChat(getApplicationContext(), t, v); //unused, FOR NOW*/
+    public void runFirstTime() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 
+    public void viewMoodGraph() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.layout_home_lower, MoodGraph.newInstance()).commit();
     }
 
     public void startMood() {
@@ -56,13 +69,19 @@ public class HomeMenu extends AppCompatActivity {
             mf.setSpriteChat(f.getSprite(), f.getDialog(), f.getID());
         } catch (NullPointerException e) {
             e.printStackTrace();
+
+            HomeLowerMenu hlm = HomeLowerMenu.newInstance();
+            hlm.setHomeMenu(this);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.layout_home_upper, HomeMorgain.newInstance())
-                    .replace(R.id.layout_home_lower, HomeLowerMenu.newInstance()).commit();
+                    .replace(R.id.layout_home_upper,
+                            HomeMorgain.newInstance(getApplicationContext()))
+                    .replace(R.id.layout_home_lower, hlm).commit();
+            ud = ud.loadData(getApplicationContext());
+            ud.flushMood();
         }
     }
 
     public void setTotalWait(int totalWait) {
-        //todo: implement this
+        //todo: implement this if/when needed
     }
 }

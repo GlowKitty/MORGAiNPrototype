@@ -1,5 +1,6 @@
 package morgain.morgainprototype;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,14 +15,15 @@ public class HomeMorgain extends Fragment {
     private ImageView v;
     private TextView t;
     private Resources res;
+    private Context ctx;
 
     public HomeMorgain() {
         // Required empty public constructor
     }
 
-    public static HomeMorgain newInstance() {
+    public static HomeMorgain newInstance(Context ctx) {
         HomeMorgain fragment = new HomeMorgain();
-
+        fragment.ctx = ctx;
         return fragment;
     }
 
@@ -31,7 +33,7 @@ public class HomeMorgain extends Fragment {
         res = getResources();
         v = (ImageView) getView().findViewById(R.id.home_morgain_face);
         t = (TextView)  getView().findViewById(R.id.home_morgain_text);
-        sc = new SpriteChat(getContext(), t, v); //!!! set resources !!!
+        sc = new SpriteChat(ctx, t, v); //!!! set resources !!!
         sc.setResources(res.obtainTypedArray(R.array.home_default_sprite),
                 res.getStringArray(R.array.home_default_dialog), 100);
         sc.startChat();

@@ -48,7 +48,7 @@ public class SpriteChat { //TODO: organize these variables
         this.ctx = ctx;
         ud = UserData.instantiate(ctx);
         name = ud.getName();
-        Log.i("SpriteChat", "Name at init: \"" + name + "\"");
+        Log.i("SpriteChat", "New sprite chat created, name: \"" + name + "\".");
     }
 
     public void setMainActivity(MainActivity m) {

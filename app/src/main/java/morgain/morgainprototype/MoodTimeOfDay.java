@@ -21,7 +21,6 @@ public class MoodTimeOfDay extends FragmentQ implements Dialogs {
     }
     private void init() {
         ud = UserData.instantiate(this.getContext());
-        //ud = ud.loadData(this.getContext());
         mood = ud.getTodayMood();
     }
 

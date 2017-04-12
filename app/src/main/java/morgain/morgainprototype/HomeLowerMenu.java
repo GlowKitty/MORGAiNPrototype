@@ -24,10 +24,24 @@ public class HomeLowerMenu extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Button trackMood = (Button) getView().findViewById(R.id.mood);
+        Button firstRun  = (Button) getView().findViewById(R.id.first_run);
+        Button viewMood  = (Button) getView().findViewById(R.id.view_mood);
         trackMood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hm.startMood();
+            }
+        });
+        firstRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hm.runFirstTime();
+            }
+        });
+        viewMood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hm.viewMoodGraph();
             }
         });
     }

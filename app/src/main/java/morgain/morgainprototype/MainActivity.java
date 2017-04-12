@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements
@@ -26,23 +27,30 @@ public class MainActivity extends AppCompatActivity implements
             if (savedInstanceState != null) {
                 return;
             }
-            mf = MorgainFace.newInstance(res.obtainTypedArray(R.array.sprite_sequence_1),
-                    res.getStringArray(R.array.dialog_sequence_1), 1);
-            mf.setMainActivity(m);//feels sloppy
+            ud = UserData.instantiate(getApplicationContext());
+            if (!ud.getFirstRun()) {
+                Log.i("MainActivity", "Skipping first run, going to HomeMenu");
+                startActivity(new Intent(this, HomeMenu.class));
+            } else {
+                Log.i("MainActivity", "First run running");
+                mf = MorgainFace.newInstance(res.obtainTypedArray(R.array.sprite_sequence_1),
+                        res.getStringArray(R.array.dialog_sequence_1), 1);
+                mf.setMainActivity(m);//feels sloppy
 
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mf)
-                    .commit();
-            getSupportFragmentManager().executePendingTransactions();
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mf)
+                        .commit();
+                getSupportFragmentManager().executePendingTransactions();
+            }
         }
-        ud = UserData.instantiate(getApplicationContext());
+
     }
 
     public void setTotalWait(int totalWait) {
         this.totalWait = totalWait;
-        changeUI();
+        //changeUI();//todo: find out what calls setTotalWait so i can remove this changeUI
     }
 
-    public void changeUI() { //the entire changeUI block is so rediculously sloppy, please help it
+    public void changeUI() { //todo: the entire changeUI block is much too sloppy, please help it
         Handler h = new Handler();
         final MainActivity m = this;
         final EnterName en = EnterName.newInstance();
@@ -158,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void goHome() {
+        ud.setFirstRun(false);
         ud.saveData(ud, getApplicationContext());
         startActivity(new Intent(this, HomeMenu.class));
     }

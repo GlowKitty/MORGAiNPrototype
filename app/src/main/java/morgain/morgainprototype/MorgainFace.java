@@ -10,15 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MorgainFace.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MorgainFace#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MorgainFace extends Fragment {
     private OnFragmentInteractionListener mListener;
 
@@ -81,6 +72,7 @@ public class MorgainFace extends Fragment {
         totalWaitTime = sc.getTotalWait();
         if (isOnMain) {
             m.setTotalWait(totalWaitTime);
+            m.changeUI();
         }
     }
 
