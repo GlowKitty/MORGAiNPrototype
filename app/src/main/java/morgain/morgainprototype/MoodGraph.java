@@ -2,6 +2,7 @@ package morgain.morgainprototype;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +32,14 @@ public class MoodGraph extends Fragment {
         ud = UserData.instantiate(getContext());
         ArrayList<Mood> moods = ud.getMoods();
         DataPoint[] data = new DataPoint[moods.size()];
+        String debug = "";
         for (int i = 0; i < moods.size(); i++) {
             data[i] = new DataPoint(i, moods.get(i).getMoodValue());
+            debug += i + ", " + moods.get(i).getMoodValue() + " | ";
         }
+        Log.i("MoodGraph", "Data: " + debug);
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(data);
         graph.addSeries(series);
     }
 

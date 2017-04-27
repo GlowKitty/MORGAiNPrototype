@@ -11,7 +11,7 @@ import android.widget.*;
 public class SpriteChat { //TODO: organize these variables
     private TextView t;
     private ImageView v;
-    private final int WAITTIME = 1100;
+    private final int WAITTIME = 100;//2500;//1100;//bunch of previous values xD
     private final int CHARTIME = 25;
     private int totalWait = 0;
     private TypedArray spriteSequence;

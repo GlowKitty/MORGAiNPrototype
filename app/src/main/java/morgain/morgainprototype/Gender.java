@@ -8,10 +8,16 @@ import java.io.Serializable;
 public class Gender implements Serializable {
     private transient Context ctx;
     private int gender;
-    private String[] genderStrings;
+    //private String[] genderStrings;
 
-    public Gender(Context ctx) {
-        genderStrings = ctx.getResources().getStringArray(R.array.genders);
+    public Gender(Context ctx) {//deprecated probably
+        //genderStrings = ctx.getResources().getStringArray(R.array.genders);
+    }
+    public Gender() {
+        gender = 0; //set to default; default is male
+    }
+    public Gender(int gender) {
+        this.gender = gender;
     }
 
     public void setGender(int gender) {
@@ -24,6 +30,8 @@ public class Gender implements Serializable {
 
     @Override
     public String toString() {
+        String[] genderStrings = MyApplication.getAppContext().getResources()
+                .getStringArray(R.array.genders); //todo: this is untested, make sure this works
         String str = "";
         if (gender > genderStrings.length) {
             str += gender;

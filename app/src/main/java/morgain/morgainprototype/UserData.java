@@ -3,41 +3,64 @@ package morgain.morgainprototype;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+
 import java.util.ArrayList;
 
-public class UserData implements Serializable {
+public class UserData implements Serializable { //may not need serializable
     private transient Context ctx; //made transient so it isn't serialized
-    private static final String FILENAME = "MORGAiN_user_data_dev_6";
+    // also context appears to only be needed to load the gender Strings under the Gender class
+    // maybe dont even need context, figure it out later
+    private transient Gson gson; //transient so not serialized
+    private static final String FILENAME = "MORGAiN_user_data_dev_6.json";
+    private static transient File FILE;
 
-    private int age;
     private String name;
     private Gender gender;
     private boolean firstRun = true;
+    private int UUID;
     private Mood today;
-    private ArrayList<Mood> moods = new ArrayList<Mood>();
+    private ArrayList<Mood> moods = new ArrayList<>();
 
     public UserData(Context ctx) {
-        this.ctx = ctx;
+        gson = new GsonBuilder().create();
+        FILE = new File(ctx.getFilesDir(), FILENAME);
         name = "";
-        gender = new Gender(ctx);
-        Log.i("UserData", "New instance of UserData created");
+        gender = new Gender();
+        createUUID();
+        Log.i("UserData", "New instance of UserData created, UUID: " + UUID);
     }
     public static UserData instantiate(Context ctx) {
         UserData ud = new UserData(ctx);
-        File file = ctx.getFileStreamPath(FILENAME);
-        if(file.exists()) {
+        if(FILE.exists()) {
             Log.i("UserData", "User Data found, loading...");
             ud = ud.loadData(ctx);
+        } else {
+            Log.i("UserData", "User Data not found, using defaults...");
         }
         return ud;
+    }
+
+    //maybe?
+    public int getUUID() {
+        return UUID;
+    }
+    private void createUUID() {
+        this.UUID = (int) (Math.random() * Integer.MAX_VALUE);
     }
 
     /*|=====================|
@@ -83,6 +106,10 @@ public class UserData implements Serializable {
         return moods.get(i);
     }
     public ArrayList<Mood> getMoods() {
+        String debug = "";
+        for (Mood m : moods) {
+            debug += m.getMoodValue() + " ";
+        }
         return moods;
     }
     public Mood getTodayMood() {
@@ -104,13 +131,24 @@ public class UserData implements Serializable {
       |  Data Methods  |
       |================|*/
     public void saveData(UserData ud, Context ctx) {
+        if (!FILE.exists()) {
+            try {
+                FILE.createNewFile();
+                Log.i("UserData", "New UserData file created at " + FILE.getPath());
+            } catch (IOException e) {
+                Log.e("UserData", "Failed to create UserData file");
+                e.printStackTrace();
+            }
+        }
         try {
-            FileOutputStream fos = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(ud);
-            oos.close();
+            gson = new GsonBuilder().create();
+            String json = gson.toJson(ud);
+            FileOutputStream fos = new FileOutputStream(FILE);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+            osw.append(json);
+            osw.close();
             fos.close();
-            Log.i("UserData", "User Data Saved");
+            Log.i("UserData", "User Data Saved. UUID: " +  UUID);
         } catch (IOException e) {
             Log.e("UserData", "User Data Save Failed");
             e.printStackTrace();
@@ -118,18 +156,30 @@ public class UserData implements Serializable {
     }
     public UserData loadData(Context ctx) {
         UserData ud;
-        try {
-            FileInputStream fis = ctx.openFileInput(FILENAME);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            ud = (UserData) ois.readObject();
-            ois.close();
-            fis.close();
-            Log.i("UserData", "User Data for " + ud.getName() + " Loaded");
-        } catch (IOException | ClassNotFoundException | NullPointerException e) {
-            e.printStackTrace();
-            Log.e("UserData", "User Data Load Failed - Creating new instance...");
+        gson = new GsonBuilder().create();
+        if (FILE.exists()) {
+            try {
+                FileInputStream fis = new FileInputStream(FILE);
+                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+                String cLine = "";
+                String json = "";
+                while ((cLine = br.readLine()) != null) {
+                    json += cLine;
+                }
+                br.close();
+                fis.close();
+                ud = gson.fromJson(json, UserData.class);
+                Log.i("UserData", "User Data Loaded for UUID: " + ud.getUUID());
+            } catch(IOException e) {
+                Log.e("UserData", "User Data Load Failed - Creating new instance...");
+                e.printStackTrace();
+                ud = new UserData(ctx);
+                saveData(ud, ctx);
+            }
+        } else {
             ud = new UserData(ctx);
             saveData(ud, ctx);
+            Log.e("UserData", "UserData file does not exist, creating file and new instance...");
         }
         return ud;
     }

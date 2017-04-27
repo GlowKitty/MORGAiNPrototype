@@ -6,7 +6,12 @@ import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class HomeMenu extends AppCompatActivity {
@@ -26,6 +31,7 @@ public class HomeMenu extends AppCompatActivity {
         TextView  t = (TextView)  findViewById(R.id.home_morgain_text);
         ImageView v = (ImageView) findViewById(R.id.home_morgain_face);
         sc = new SpriteChat(getApplicationContext(), t, v);
+        resizeFrameLayout(R.id.layout_home_upper, 1.0 / 3.0);
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.layout_home_upper, HomeMorgain.newInstance(getApplicationContext()))
@@ -41,12 +47,24 @@ public class HomeMenu extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
+    private void resizeFrameLayout(int id, double percentage) {
+        DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
+        Float px = displayMetrics.heightPixels * (float) percentage;
+        Log.i("HomeMenu", "upper menu height: " + px.intValue() + "dp, ratio: " + percentage);
+        FrameLayout layout = (FrameLayout) findViewById(id);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) layout.getLayoutParams();
+        params.height = px.intValue();
+        layout.setLayoutParams(params);
+    }
+
     public void viewMoodGraph() {
+        resizeFrameLayout(R.id.layout_home_upper, 1.0 / 3.0);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.layout_home_lower, MoodGraph.newInstance()).commit();
     }
 
     public void startMood() {
+        resizeFrameLayout(R.id.layout_home_upper, 0.5);
         mq = new MoodQuestions(getApplicationContext());
         FragmentQ f = (FragmentQ) mq.getNextQuestion();
         f.setHomeMenu(this);
@@ -68,17 +86,28 @@ public class HomeMenu extends AppCompatActivity {
 
             mf.setSpriteChat(f.getSprite(), f.getDialog(), f.getID());
         } catch (NullPointerException e) {
-            e.printStackTrace();
-
+            //e.printStackTrace();
+            Log.i("HomeMenu", "End of questions loop");
             HomeLowerMenu hlm = HomeLowerMenu.newInstance();
             hlm.setHomeMenu(this);
+            resizeFrameLayout(R.id.layout_home_upper, 1.0 / 3.0);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.layout_home_upper,
                             HomeMorgain.newInstance(getApplicationContext()))
                     .replace(R.id.layout_home_lower, hlm).commit();
+
             ud = ud.loadData(getApplicationContext());
             ud.flushMood();
+            ud.saveData(ud, getApplicationContext());
         }
+    }
+
+    public void backToHome() {
+        HomeLowerMenu hlm = HomeLowerMenu.newInstance();
+        hlm.setHomeMenu(this);
+        resizeFrameLayout(R.id.layout_home_upper, 1.0 / 3.0);
+        getSupportFragmentManager().beginTransaction().replace(R.id.layout_home_lower, hlm)
+                .commit();
     }
 
     public void setTotalWait(int totalWait) {

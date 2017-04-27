@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void goHome() {
+        ud = ud.loadData(getApplicationContext());
         ud.setFirstRun(false);
         ud.saveData(ud, getApplicationContext());
         startActivity(new Intent(this, HomeMenu.class));
