@@ -1,14 +1,15 @@
 package morgain.morgainprototype;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.ViewGroup;
+
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,10 +58,20 @@ public class HomeMenu extends AppCompatActivity {
         layout.setLayoutParams(params);
     }
 
+    public void setSpriteChat(int sprite, int dialog) {
+        TextView  t = (TextView)  findViewById(R.id.home_morgain_text);
+        ImageView v = (ImageView) findViewById(R.id.home_morgain_face);
+        sc.setTextSprite(t, v);
+        sc.setResources(getResources().obtainTypedArray(sprite),
+                getResources().getStringArray(dialog), Integer.MAX_VALUE);
+        sc.startChat();
+    }
+
     public void viewMoodGraph() {
         resizeFrameLayout(R.id.layout_home_upper, 1.0 / 3.0);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.layout_home_lower, MoodGraph.newInstance()).commit();
+        setSpriteChat(R.array.mood_graph_sprite, R.array.mood_graph_dialog);
     }
 
     public void startMood() {
@@ -108,9 +119,19 @@ public class HomeMenu extends AppCompatActivity {
         resizeFrameLayout(R.id.layout_home_upper, 1.0 / 3.0);
         getSupportFragmentManager().beginTransaction().replace(R.id.layout_home_lower, hlm)
                 .commit();
+        setSpriteChat(R.array.home_default_sprite, R.array.home_default_dialog);
     }
 
     public void setTotalWait(int totalWait) {
         //todo: implement this if/when needed
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.layout_home_lower);
+
+        if (f instanceof MoodGraph) {
+            backToHome();
+        }
     }
 }

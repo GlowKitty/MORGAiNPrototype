@@ -29,7 +29,7 @@ public class MoodScene extends FragmentQ implements Dialogs {
         return getResources().obtainTypedArray(R.array.mood_color_sprite);
     }
     public String[] getDialog() {
-        return getResources().getStringArray(R.array.mood_color_dialog);
+        return getResources().getStringArray(R.array.mood_scene_dialog);
     }
     public int getID() {
         return ID;

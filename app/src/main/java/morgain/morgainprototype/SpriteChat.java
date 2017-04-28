@@ -56,6 +56,11 @@ public class SpriteChat { //TODO: organize these variables
         this.m = m;
     }
 
+    public void setTextSprite(TextView t, ImageView v) {
+        this.t = t;
+        this.v = v;
+    }
+
     public void startChat() {
         int nextTime = 0;
         ud = ud.loadData(ctx);

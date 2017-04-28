@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class MoodGraph extends Fragment {
     GraphView graph;
     UserData ud;
+    //HomeMenu hm;
 
     public MoodGraph() {
         // Required empty public constructor
@@ -54,5 +55,4 @@ public class MoodGraph extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_mood_graph, container, false);
     }
-
 }

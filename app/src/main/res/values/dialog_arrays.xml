@@ -302,4 +302,11 @@
     <string-array name="mood_weather_dialog">
         <item>What weather conditions best describes how you feel?</item>
     </string-array>
+
+    <array name="mood_graph_sprite">
+        <item>@drawable/smilingresting</item>
+    </array>
+    <string-array name="mood_graph_dialog">
+        <item>Here\'s a graph of how you\'re progressing.</item>
+    </string-array>
 </resources>
