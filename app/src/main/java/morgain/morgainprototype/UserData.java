@@ -26,7 +26,7 @@ public class UserData implements Serializable { //may not need serializable
     // also context appears to only be needed to load the gender Strings under the Gender class
     // maybe dont even need context, figure it out later
     private transient Gson gson; //transient so not serialized
-    private static final String FILENAME = "MORGAiN_user_data_dev_6.json";
+    private static final String FILENAME = "MORGAiN_user_data_dev_7.json";
     private static transient File FILE;
 
     private String name;
@@ -78,7 +78,7 @@ public class UserData implements Serializable { //may not need serializable
       |  Name Methods  |
       |================|*/
     public void setName(String name) {
-        this.name = name;
+        this.name = name.substring(0, 1).toUpperCase() + name.substring(1);
         Log.i("UserData", "Name set to \"" + this.name + "\"");
     }
     public String getName() {
@@ -100,7 +100,14 @@ public class UserData implements Serializable { //may not need serializable
       |  Mood Methods  |
       |================|*/
     public Mood getMood() {
-        return moods.get(moods.size() - 1);
+        Mood m;
+        try {
+            m = moods.get(moods.size() - 1);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Log.e("UserData", "No mood in history, creating new neutral mood");
+            m = new Mood();
+        }
+        return m;
     }
     public Mood getMood(int i) {
         return moods.get(i);

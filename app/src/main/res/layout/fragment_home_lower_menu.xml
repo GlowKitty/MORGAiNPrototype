@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     tools:context="morgain.morgainprototype.HomeLowerMenu">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,13 +11,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <Button
-                android:text="Track your mood"
+                android:id="@+id/mood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/mood" />
+                android:text="Track your mood" />
 
             <Button
                 android:id="@+id/view_mood"
@@ -28,10 +26,16 @@
                 android:text="View Mood" />
 
             <Button
-                android:text="Music-mood match"
+                android:id="@+id/cope"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/music" />
+                android:text="Coping Skills" />
+
+            <Button
+                android:id="@+id/music"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Music-mood match" />
 
             <Button
                 android:id="@+id/first_run"

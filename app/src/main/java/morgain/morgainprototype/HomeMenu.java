@@ -97,7 +97,6 @@ public class HomeMenu extends AppCompatActivity {
 
             mf.setSpriteChat(f.getSprite(), f.getDialog(), f.getID());
         } catch (NullPointerException e) {
-            //e.printStackTrace();
             Log.i("HomeMenu", "End of questions loop");
             HomeLowerMenu hlm = HomeLowerMenu.newInstance();
             hlm.setHomeMenu(this);
@@ -111,6 +110,14 @@ public class HomeMenu extends AppCompatActivity {
             ud.flushMood();
             ud.saveData(ud, getApplicationContext());
         }
+    }
+
+    public void goToCope() {
+        CopingSkills cs = CopingSkills.newInstance();
+        resizeFrameLayout(R.id.layout_home_upper, 0.0);
+        //resizeFrameLayout(R.id.layout_home_upper, 0.9 / 3.0);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.layout_home_lower, cs).commit();
     }
 
     public void backToHome() {
@@ -130,8 +137,10 @@ public class HomeMenu extends AppCompatActivity {
     public void onBackPressed() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.layout_home_lower);
 
-        if (f instanceof MoodGraph) {
+        if (!(f instanceof HomeLowerMenu)) {
             backToHome();
-        }
+        } /*else if (f instanceof MoodGraph) {
+            backToHome();
+        }*/
     }
 }

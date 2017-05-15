@@ -309,4 +309,19 @@
     <string-array name="mood_graph_dialog">
         <item>Here\'s a graph of how you\'re progressing.</item>
     </string-array>
+
+
+    <string name="cope_one_dialog">
+        For depression - Write in a journal. Keeping a journal of good things that happen, such as a gratitude journal, can help by helping you look on the positive side of things. Looking back on this journal can allow one to look back on positive memories.
+        \nhttp://greatergood.berkeley.edu/article/item/tips_for_keeping_a_gratitude_journal
+    </string>
+
+    <string name="cope_two_dialog">
+        Meditation - Meditation and physical activity can help improve a healthy lifestyle. Using mindfulness to relax from head to toe is a good place to start.
+        \nhttps://www.adaa.org/tips-manage-anxiety-and-stress
+    </string>
+
+    <string name="cope_three_dialog">
+        Socialize and do not isolate yourself - Hanging out with friends or having a conversation with someone can greatly help. Never find yourself alone in times of need. Reaching out can help you connect with others who may share similar experiences and know what you are going through.
+    </string>
 </resources>
